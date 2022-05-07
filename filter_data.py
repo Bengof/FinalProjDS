@@ -26,7 +26,7 @@ def get_labevents_itemids():
 
 
 def get_sepsis_icd_codes():
-    return D_ICD_DIAGNOSIS[D_ICD_DIAGNOSIS["long_title"].str.lower().str.contains("sepsis")][["icd_code", "long_title"]]
+    return D_ICD_DIAGNOSIS[D_ICD_DIAGNOSIS["long_title"].str.lower().str.contains("sepsis") | D_ICD_DIAGNOSIS["long_title"].str.lower().str.contains(" septic ")][["icd_code", "long_title"]]
 
 
 def get_all_sepsis_patients():
