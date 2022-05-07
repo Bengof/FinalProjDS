@@ -16,7 +16,9 @@ def get_chartevents_itemids():
     Blood_Pressure_items = ITEM_IDS[ITEM_IDS["label"].str.contains("Blood Pressure")]["itemid"]
     IABP_items = ITEM_IDS[ITEM_IDS["category"] == "IABP"]["itemid"]
     MAP_items = ITEM_IDS[ITEM_IDS["label"].str.contains("MAP") | ITEM_IDS["label"].str.contains("Map")]["itemid"]
-    chartevents_itemid = pd.concat([MAP_items, IABP_items, contains_BP, Blood_Pressure_items]) 
+    heart_rate_items = ITEM_IDS[ITEM_IDS["label"].str.contains("Heart Rate| HR ", regex=True)]
+    heart_rate_items = heart_rate_items[heart_rate_items["category"] == "Routine Vital Signs"]["itemid"]
+    chartevents_itemid = pd.concat([MAP_items, IABP_items, contains_BP, Blood_Pressure_items, heart_rate_items]) 
     return chartevents_itemid
 
 
