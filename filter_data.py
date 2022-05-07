@@ -36,7 +36,7 @@ def get_all_sepsis_patients():
     sepsis_codes = get_sepsis_icd_codes()
     sepsis_patients = DIAGNOSES_ICD[DIAGNOSES_ICD["icd_code"].isin(sepsis_codes["icd_code"])]
     sepsis_patients = sepsis_patients.merge(sepsis_codes, left_on="icd_code", right_on="icd_code")
-    sepsis_patients = sepsis_patients.merge(PATIENTS[["subject_id", "gender", "anchor_age"]], left_on="subject_id", right_on="subject_id")
+    sepsis_patients = sepsis_patients.merge(PATIENTS[["subject_id", "gender", "anchor_age", "dod"]], left_on="subject_id", right_on="subject_id")
     return sepsis_patients
 
 def get_top_sepsis_patients_subject_ids():
