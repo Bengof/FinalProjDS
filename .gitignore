@@ -1,9 +1,6 @@
 data/
-<<<<<<< HEAD
 filtered/
 ignore/
-=======
->>>>>>> bb56384d2fb9d9ad4dacd9548d816ac622501693
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
