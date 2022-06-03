@@ -98,9 +98,9 @@ def save_filtered_labevents():
 
 def save_filtered_patients(percents=SEPSIS_PERCENTAGE):
     sepsis_patients = get_all_sepsis_patients()
-    different_sepsis_amounts = sepsis_patients.groupby(by="long_title").agg({"subject_id": "count"}).sort_values(by="subject_id", ascending=False)
-    different_sepsis_amounts_normalized = different_sepsis_amounts.cumsum()/different_sepsis_amounts.sum()
-    different_sepsis_amounts_normalized = different_sepsis_amounts_normalized.reset_index()
-    top_titles = different_sepsis_amounts_normalized[different_sepsis_amounts_normalized["subject_id"] <= percents]["long_title"]
-    filtered_sepsis = sepsis_patients[sepsis_patients["long_title"].isin(top_titles)]
-    filtered_sepsis.to_csv("filtered\\filtered_patients.csv")
+    # different_sepsis_amounts = sepsis_patients.groupby(by="long_title").agg({"subject_id": "count"}).sort_values(by="subject_id", ascending=False)
+    # different_sepsis_amounts_normalized = different_sepsis_amounts.cumsum()/different_sepsis_amounts.sum()
+    # different_sepsis_amounts_normalized = different_sepsis_amounts_normalized.reset_index()
+    # top_titles = different_sepsis_amounts_normalized[different_sepsis_amounts_normalized["subject_id"] <= percents]["long_title"]
+    # filtered_sepsis = sepsis_patients[sepsis_patients["long_title"].isin(top_titles)]
+    sepsis_patients.to_csv("filtered\\filtered_patients.csv")
