@@ -1,8 +1,20 @@
-ICD_CODES = [5291, #
-             4766, #
-             3175, #
-             2988] # TOP 4 sepsis icd codes
-CHARTEVENTS_CODES = [225309, 225310, 225312, 220050, 220051, 220052, 220179, 220180, 220181] # ART + non invasive: BP, systolic, diastolic, mean,
+ICD_CODES = ["99592", # Severe sepsis, icd_version =  9
+             "R652", # Severe sepsis, icd_version = 10
+             "R6520", # Severe sepsis, icd_version = 10
+             "R6521",  # Severe sepsis with septic shock, icd_version = 10
+             "99591" # Sepsis
+             ]
+CHARTEVENTS_CODES = [225309,
+                    225310,
+                    225312,
+                    220050,
+                    220051, 
+                    220052, 
+                    220179, 
+                    220180, 
+                    220181, 
+                    220045 #HR
+                    ] 
 INPUTEVENTS_CODES = [
     221662, # Dopamine
     221289,	#Epinephrine
