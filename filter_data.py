@@ -2,6 +2,8 @@ from asyncio import constants
 import pandas as pd
 import chunk_filtering
 import consts
+import importlib
+importlib.reload(consts)
 
 ITEM_IDS = pd.read_csv("data\icu\d_items.csv")
 D_ICD_DIAGNOSIS = pd.read_csv("data\hosp\d_icd_diagnoses.csv")
@@ -33,6 +35,7 @@ def get_procedureevents_itemids():
 def get_sepsis_subject_ids():
     filtered_sepsis = pd.read_csv("filtered\\filtered_patients.csv")
     return filtered_sepsis["subject_id"]
+
 
 def filter_small_file(input_path, subject_ids, itemids=None):
     df = pd.read_csv(input_path)
@@ -76,6 +79,8 @@ def save_filtered_labevents():
     filtered_labevents = chunk_filtering.filter_big_file("data\hosp\labevents.csv", get_sepsis_subject_ids(), get_labevents_itemids())
     filtered_labevents = filtered_labevents.merge(LABITEMS[["itemid", "label"]], left_on="itemid", right_on="itemid")
     filtered_labevents = filtered_labevents.rename(columns={"label":"itemid_label"})
+    filtered_labevents = filtered_labevents.drop(filtered_labevents[filtered_labevents["value"] == "-"].index)
+    filtered_labevents["value"] = filtered_labevents["value"].astype(float)
     filtered_labevents.to_csv("filtered\\filtered_labevents.csv")
 
 def save_filtered_patients():
