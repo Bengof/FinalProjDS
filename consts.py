@@ -40,4 +40,6 @@ MINIMAL_LOS = 1 # minimal icu stay
 MINIMAL_AGE =  20
 MAXIMAL_AGE = 90
 
+HOURS_BEFORE_DOSE = 1
+
 
