@@ -1,6 +1,7 @@
 data/
 filtered/
 ignore/
+combined/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
