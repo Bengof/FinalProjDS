@@ -1,3 +1,11 @@
+from enum import Enum
+class State(Enum):
+    OK = 0,
+    LESS_THAN_EPSILON = 1,
+    OVERLAPPED_WITH_DIFFERENT_MED = 2,
+
+
+
 ICD_CODES = ["99592", # Severe sepsis, icd_version =  9
              "R652", # Severe sepsis, icd_version = 10
              "R6520", # Severe sepsis, icd_version = 10
