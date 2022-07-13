@@ -1,8 +1,9 @@
 from enum import Enum
+
 class State(Enum):
     OK = 0,
     LESS_THAN_EPSILON = 1,
-    OVERLAPPED_WITH_DIFFERENT_MED = 2,
+    OVERLAPPED_WITH_DIFFERENT_MED = 2
 
 
 
@@ -49,5 +50,7 @@ MINIMAL_AGE =  20
 MAXIMAL_AGE = 90
 
 HOURS_BEFORE_DOSE = 1
+
+BP_RANGES = ((0,44),(45,49),(50,54),(55,59),(60,64),(65,69),(70,74),(75,79),(80,84),(85,89),(90,94),(95,99),(100,104),(105,109),(110,114),(115,200))
 
 
