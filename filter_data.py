@@ -89,3 +89,9 @@ def save_filtered_patients():
     sepsis_patients = PATIENTS.merge(patients_subject_ids, left_on="subject_id", right_on="subject_id")
     sepsis_patients = sepsis_patients[(sepsis_patients["anchor_age"] >= consts.MINIMAL_AGE) & (sepsis_patients["anchor_age"] <= consts.MAXIMAL_AGE)]
     sepsis_patients.to_csv("filtered\\filtered_patients.csv")
+
+def filter_short_stays_and_different_unit(inputevents, icustays_filtered):
+    icustays_filtered = icustays_filtered[icustays_filtered["first_careunit"] == icustays_filtered["last_careunit"]]
+    icustays_filtered = icustays_filtered[icustays_filtered["los"] >= consts.MINIMAL_LOS]
+    inputevents = inputevents.merge(icustays_filtered[["stay_id", "first_careunit"]], left_on="stay_id", right_on="stay_id")
+    return inputevents
