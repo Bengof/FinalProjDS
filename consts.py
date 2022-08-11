@@ -3,7 +3,8 @@ from enum import Enum
 class State(Enum):
     OK = 0,
     LESS_THAN_EPSILON = 1,
-    OVERLAPPED_WITH_DIFFERENT_MED = 2
+    OVERLAPPED_WITH_DIFFERENT_MED = 2,
+    OVERLAPPED_WITH_ANOTHER_NE = 3,
 
 
 
