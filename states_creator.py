@@ -54,10 +54,15 @@ def mark_events_by_gap(inputs_df, statusdescription, gap_length):
     inputs_df = inputs_df.drop(columns=["prev_starttime", "prev_endtime", "prev_stay_id", "prev_statusdescription", "current_gap"])
     return inputs_df
 
+def mark_finishedrunning(inputs_df):
+    inputs_df.loc[inputs_df.statusdescription == "FinishedRunning", "State"] = consts.State.FINISHED_RUNNING
+    return inputs_df
+    
 
 def create_states(inputs_df):
     inputs_df["State"] = np.nan
-    inputs_df_with_states = mark_ne_events_that_overlap(inputs_df)
+    inputs_df_with_states = mark_finishedrunning(inputs_df)
+    inputs_df_with_states = mark_ne_events_that_overlap(inputs_df_with_states)
     inputs_df_with_states = mark_events_by_gap(inputs_df_with_states, "Stopped", consts.MINIMAL_GAP)
     inputs_df_with_states = mark_events_by_gap(inputs_df_with_states, "Paused", consts.MINIMAL_GAP)
     return inputs_df_with_states
