@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 def get_events_beofore_dose(event_time, interval, stay_id, table, time_field, is_procedure=False):
     if is_procedure: 
@@ -18,7 +19,7 @@ def get_events_beofore_dose(event_time, interval, stay_id, table, time_field, is
     return events
 
 
-def add_prev_decision(inputevents):
+def get_prev_dose(inputevents):
     inputevents = inputevents.sort_values(by=["stay_id", "starttime"])
     # convert to datetimes:
     inputevents["starttime"] = pd.to_datetime(inputevents["starttime"])

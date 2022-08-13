@@ -29,4 +29,6 @@ def get_relevant_doses_with_bp(chartevent):
     inputevents_states = add_prev_decision(inputevents_states)
     # select to each dose what is the closest BP events in the interval
     inputevents_states[["bp_time","bp_val"]] = inputevents_states.apply(lambda row: get_nearest_bp(row, chartevent), axis=1, result_type="expand")
+    # filter non Norepinephrine medicine
+    inputevents_states = inputevents_states[inputevents_states.itemid_label == "Norepinephrine"]
     return inputevents_states

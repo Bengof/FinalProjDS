@@ -2,7 +2,7 @@ from tqdm import tqdm
 import pandas as pd
 import numpy as np
 import consts
-from preceding_events import add_prev_decision
+from preceding_events import get_prev_dose
 
 
 
@@ -44,7 +44,7 @@ def mark_events_by_gap(inputs_df, statusdescription, gap_length):
     The function consider only cases in which the previous record was eneded before the current record. 
     Other cases of overlap records will be covered in other checks that are done before.
     """
-    inputs_df = add_prev_decision(inputs_df)
+    inputs_df = get_prev_dose(inputs_df)
     inputs_df["current_gap"] = inputs_df.starttime - inputs_df.prev_endtime
     inputs_df.loc[(inputs_df.prev_statusdescription == statusdescription) &\
          (inputs_df.current_gap <= pd.Timedelta(gap_length)) &\
