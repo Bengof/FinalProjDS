@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import consts
 
-STATUS_DESC_TO_STATE = {
+NOR_STATUS_DESC_TO_STATE = {
     "FinishedRunning": consts.State.OVERLAPPED_WITH_ANOTHER_NE_FINISHED,
     "Paused": consts.State.OVERLAPPED_WITH_ANOTHER_NE_PAUSED,
     "Stopped": consts.State.OVERLAPPED_WITH_ANOTHER_NE_STOPPED,
@@ -23,7 +23,7 @@ def mark_ne_events_that_overlap(df):
                 if med_event.starttime <= noreadrenaline_event.starttime and med_event.endtime > noreadrenaline_event.starttime\
                     and med_event.input_index != noreadrenaline_event.input_index:
                     if med_event.itemid_label == "Norepinephrine":
-                        df.loc[df["input_index"] == noreadrenaline_event.input_index, "State"] = STATUS_DESC_TO_STATE[med_event.statusdescription]
+                        df.loc[df["input_index"] == noreadrenaline_event.input_index, "State"] = NOR_STATUS_DESC_TO_STATE[med_event.statusdescription]
                     else:
                         df.loc[df["input_index"] == noreadrenaline_event.input_index, "State"] = consts.State.OVERLAPPED_WITH_DIFFERENT_MED
     return df
