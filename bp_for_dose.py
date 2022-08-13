@@ -1,19 +1,8 @@
 import inputs_states_filters
 import pandas as pd
 import numpy as np
-from preceding_events import get_events_beofore_dose
+from preceding_events import get_events_beofore_dose, add_prev_decision
 import consts
-
-def add_prev_decision(inputevents):
-    # convert to datetimes:
-    inputevents["starttime"] = pd.to_datetime(inputevents["starttime"])
-    inputevents["endtime"] = pd.to_datetime(inputevents["endtime"])
-    # add to each row its previous:
-    inputevents["prev_starttime"] = inputevents["starttime"].shift(1)
-    inputevents["prev_stay_id"] = inputevents["stay_id"].shift(1)
-    # delete rows that the preceding row is another stay id
-    inputevents.loc[inputevents["prev_stay_id"] != inputevents["stay_id"], "prev_start_time"] = np.nan
-    return inputevents
 
 def get_nearest_bp(dose_row, chartevent):
     interval = dose_row["starttime"] - dose_row["prev_starttime"]

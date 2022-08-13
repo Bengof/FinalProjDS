@@ -2,7 +2,8 @@ from tqdm import tqdm
 import pandas as pd
 import numpy as np
 import consts
-from bp_for_dose import add_prev_decision
+from preceding_events import add_prev_decision
+
 
 
 NOR_STATUS_DESC_TO_STATE = {
@@ -10,6 +11,11 @@ NOR_STATUS_DESC_TO_STATE = {
     "Paused": consts.State.OVERLAPPED_WITH_ANOTHER_NE_PAUSED,
     "Stopped": consts.State.OVERLAPPED_WITH_ANOTHER_NE_STOPPED,
     "ChangeDose/Rate": consts.State.OVERLAPPED_WITH_ANOTHER_NE_CHANGED_DOSE,
+}
+
+GAP_STATUS_DESC_TO_STATE = {
+    "Stopped": consts.State.SMALL_GAP_AND_SAME_RATE_STOPPED,
+    "Paused": consts.State.SMALL_GAP_AND_SAME_RATE_PAUSED
 }
 
 
@@ -31,19 +37,30 @@ def mark_ne_events_that_overlap(df):
     return df
 
 
-def mark_events_by_gap(statusdescription, gap_length):
-    df = add_prev_decision(df)
-    current_gap = df.starttime - df.prev_starttime
-    df.loc[df.statusdescription == statusdescription and current_gap < gap_length, "statusdescription"] = s
-
+def mark_events_by_gap(inputs_df, statusdescription, gap_length):
+    """
+    Marks events that have almost the same rate (0.2 and 0.199999999890) and have a very small gap.
+    We decide what is small gap in the consts file.
+    The function consider only cases in which the previous record was eneded before the current record. 
+    Other cases of overlap records will be covered in other checks that are done before.
+    """
+    inputs_df = add_prev_decision(inputs_df)
+    inputs_df["current_gap"] = inputs_df.starttime - inputs_df.prev_endtime
+    inputs_df.loc[(inputs_df.prev_statusdescription == statusdescription) &\
+         (inputs_df.current_gap <= pd.Timedelta(gap_length)) &\
+             (inputs_df.current_gap >= pd.Timedelta(0)) & \
+         (np.isclose(inputs_df.originalrate, inputs_df.prev_originalrate)), "State"] \
+        = GAP_STATUS_DESC_TO_STATE[statusdescription]
+    inputs_df = inputs_df.drop(columns=["prev_starttime", "prev_endtime", "prev_stay_id", "prev_statusdescription", "current_gap"])
+    return inputs_df
 
 
 def create_states(inputs_df):
-
     inputs_df["State"] = np.nan
-
-    return mark_ne_events_that_overlap(inputs_df)
-
+    inputs_df_with_states = mark_ne_events_that_overlap(inputs_df)
+    inputs_df_with_states = mark_events_by_gap(inputs_df_with_states, "Stopped", consts.MINIMAL_GAP)
+    inputs_df_with_states = mark_events_by_gap(inputs_df_with_states, "Paused", consts.MINIMAL_GAP)
+    return inputs_df_with_states
     
 
 if '__main__' == __name__:

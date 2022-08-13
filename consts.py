@@ -8,6 +8,10 @@ class State(Enum):
     OVERLAPPED_WITH_ANOTHER_NE_STOPPED = 4,
     OVERLAPPED_WITH_ANOTHER_NE_PAUSED = 5,
     OVERLAPPED_WITH_ANOTHER_NE_FINISHED = 5,
+    SMALL_GAP_AND_SAME_RATE_STOPPED = 6,
+    SMALL_GAP_AND_SAME_RATE_PAUSED = 7,
+
+
 
 
 
@@ -57,4 +61,6 @@ HOURS_BEFORE_DOSE = 1
 
 BP_RANGES = ((0,44),(45,49),(50,54),(55,59),(60,64),(65,69),(70,74),(75,79),(80,84),(85,89),(90,94),(95,99),(100,104),(105,109),(110,114),(115,200))
 
+# minimal gap between dose to previous dose in order to mark it as dose which is not a decision in Pause and Stopped statusdescription
+MINIMAL_GAP = 2
 
