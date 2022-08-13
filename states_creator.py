@@ -2,6 +2,8 @@ from tqdm import tqdm
 import pandas as pd
 import numpy as np
 import consts
+from bp_for_dose import add_prev_decision
+
 
 def mark_ne_events_that_overlap(df):
     """
@@ -22,10 +24,18 @@ def mark_ne_events_that_overlap(df):
                         med_overlap_indicies.append(noreadrenaline_event.input_index)
     df.loc[df["input_index"].isin(nor_overlap_indicies), "State"] = consts.State.OVERLAPPED_WITH_ANOTHER_NE
     df.loc[df["input_index"].isin(med_overlap_indicies), "State"] = consts.State.OVERLAPPED_WITH_DIFFERENT_MED
-    return df
+    return df    
+
+
+def mark_events_by_gap(statusdescription, gap_length):
+    df = add_prev_decision(df)
+    current_gap = df.starttime - df.prev_starttime
+    df.loc[df.statusdescription == statusdescription and current_gap < gap_length, "statusdescription"] = s
+
 
 
 def create_states(inputs_df):
+
     inputs_df["State"] = np.nan
 
     return mark_ne_events_that_overlap(inputs_df)
@@ -42,3 +52,4 @@ if '__main__' == __name__:
     filtered_inputs_df = inputs_df[inputs_df["stay_id"].isin(stay_ids)].copy()
     inputs_with_states_df = create_states(filtered_inputs_df)
     inputs_with_states_df.to_csv("tmp\\inputs_with_states.csv")
+
