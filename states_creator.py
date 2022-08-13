@@ -20,7 +20,7 @@ def mark_ne_events_that_overlap(df):
         patient_full_inputs = df[(df["stay_id"] == stay_id) ][["input_index", "starttime", "endtime", "statusdescription", "originalrate", "itemid_label", "State"]].sort_values(by="starttime")
         for noreadrenaline_event in patient_noreadrenaline.itertuples():
             for med_event in patient_full_inputs.itertuples():
-                if med_event.starttime < noreadrenaline_event.starttime and med_event.endtime > noreadrenaline_event.starttime\
+                if med_event.starttime <= noreadrenaline_event.starttime and med_event.endtime > noreadrenaline_event.starttime\
                     and med_event.input_index != noreadrenaline_event.input_index:
                     if med_event.itemid_label == "Norepinephrine":
                         df.loc[df["input_index"] == noreadrenaline_event.input_index, "State"] = STATUS_DESC_TO_STATE[med_event.statusdescription]
