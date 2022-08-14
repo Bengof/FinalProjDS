@@ -2,9 +2,25 @@ import numpy as np
 import filter_data
 import pandas as pd
 from bp_for_dose import get_relevant_doses_with_bp
+import filter_data
 
 
-def run_pipeline(count_samples_stay_ids=None):
+def create_filtered_files():
+    """
+    Creates filtered files for the pipeline. Default path is "filtered".
+    """
+    filter_data.save_filtered_patients()
+    filter_data.save_filtered_chartevents()
+    filter_data.save_filtered_inputevents()
+    filter_data.save_filtered_icustays()
+    # filter_data.save_filtered_procedureevents()
+    # filter_data.save_filtered_labevents()
+    # filter_data.save_filtered_transfers()
+
+
+def run_pipeline(count_samples_stay_ids=None, create_filtered_files_flag=False):
+    if create_filtered_files_flag:
+        create_filtered_files()
     input_events = pd.read_csv("filtered\\input_events_filtered_by_subject_id_and_medicine.csv")
     print("Read input events")
     chart_events = pd.read_csv("filtered\\filtered_chartevents.csv")
@@ -27,7 +43,7 @@ def run_pipeline(count_samples_stay_ids=None):
 
 
 if '__main__' == __name__:
-    inputevents_states_ok, inputevents_states_full = run_pipeline(50)
-    inputevents_states_ok.to_csv("tmp\\full_pipeline_ok_filtered.csv")
-    inputevents_states_full.to_csv("tmp\\full_pipeline_full.csv")
+    inputevents_states_ok, inputevents_states_full = run_pipeline()
+    inputevents_states_ok.to_csv("processed\\full_pipeline_ok_filtered.csv")
+    inputevents_states_full.to_csv("processed\\full_pipeline_full.csv")
 

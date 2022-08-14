@@ -1,0 +1,438 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{babel}
+\newcommand{\indep}{\perp \!\!\! \perp}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding T1
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\topmargin 2.5cm
+\rightmargin 2.5cm
+\bottommargin 2.5cm
+\secnumdepth 4
+\tocdepth 4
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Final Data Science Project (67814) - Analyzing Decision Making in Medical
+ ICUs 
+\end_layout
+
+\begin_layout Author
+Name Nameson, Name Namesberg
+\end_layout
+
+\begin_layout Section
+Abstract
+\end_layout
+
+\begin_layout Standard
+Up to 250 words, similar to abstracts in articles.
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Two to three written pages, figures are strongly encouraged but are not
+ included in the page count.
+ Needs to include a description of the problem and the data and of the research
+ question in hand.
+\end_layout
+
+\begin_layout Subsection
+Background
+\end_layout
+
+\begin_layout Standard
+Some general background to the problem.
+\end_layout
+
+\begin_layout Subsubsection
+A Possible Dive Into a Specific Relevant Topic
+\end_layout
+
+\begin_layout Subsubsection
+Another Possible Dive
+\end_layout
+
+\begin_layout Subsection
+Related Work
+\end_layout
+
+\begin_layout Standard
+Covering relevant past research and works, should include citations in a
+ clear and consistent format.
+\end_layout
+
+\begin_layout Subsection
+Data
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Standard
+We divided the inputs data to groups according to their last blood pressure
+ measurement before receiving the Norepinephrine:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+BP\ RANGES=\left[\underset{b_{0}}{\underbrace{(0,44)}},\underset{b_{1}}{\underbrace{(45,49)}},(50,54),(55,59),(60,64),(65,69),(70,74),(75,79),(80,84),(85,89),(90,94),(95,99),(100,104),(105,109),\underset{b_{14}}{\underbrace{(110,114)}},\underset{b_{15}}{\underbrace{(115,200)}}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After doing so, we want to check for each group the hypothesis that the
+ treatment will be the same across different units, against the conjecture
+ that treatment varies.
+ Let 
+\begin_inset Formula $\mu_{M,b_{j}}$
+\end_inset
+
+ denote the expected value of the Medical ICU unit for the group with bp
+ in the range denoted as 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+, and likewise for 
+\begin_inset Formula $\mu_{S,b_{j}}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H_{0}:\mu_{M,b_{j}}=
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+An Informative Subsection Title Regarding Some Experiments and Results
+\end_layout
+
+\begin_layout Standard
+Accompanied by relevant plots, figures and tables.
+\end_layout
+
+\begin_layout Subsection
+Another Informative Subsection Title Regarding Some Different Experiments
+ and Results
+\end_layout
+
+\begin_layout Standard
+Also containing relevant visuals.
+\end_layout
+
+\begin_layout Section
+Discussion
+\end_layout
+
+\begin_layout Standard
+About 2 written pages, discussing the results and their implications.
+\end_layout
+
+\begin_layout Subsection
+A Brief Summary of the Results in Retrospective 
+\end_layout
+
+\begin_layout Subsection
+Conclusions Based on the Results
+\end_layout
+
+\begin_layout Subsection
+Limitations
+\end_layout
+
+\begin_layout Standard
+A critical discussion on the work's limitations, simplifying assumptions,
+ possible biases etc, and their possible effects on the results and the
+ conclusions.
+\end_layout
+
+\begin_layout Subsection
+Future Work
+\end_layout
+
+\begin_layout Standard
+A discussion on relevant future work, maybe taking into account the current
+ limitations and possible solutions to them.
+\end_layout
+
+\begin_layout Section
+Resources and Methods
+\end_layout
+
+\begin_layout Subsection
+Preprocessing
+\end_layout
+
+\begin_layout Subsection
+Statistical Methods and Considerations
+\end_layout
+
+\begin_layout Subsection
+Models and ML Methods Used
+\end_layout
+
+\begin_layout Standard
+If they were not thoroughly discussed earlier.
+ Maybe relevant model training details.
+\end_layout
+
+\begin_layout Subsection
+Resources
+\end_layout
+
+\begin_layout Subsection
+Work Pipeline
+\end_layout
+
+\begin_layout Standard
+A description and a flowchart of the work pipeline
+\end_layout
+
+\begin_layout Subsection*
+Division of work
+\end_layout
+
+\begin_layout Standard
+If you split the responsibilities.
+ 
+\end_layout
+
+\begin_layout Itemize
+Name Nameson: Some work done only by them.
+ 
+\end_layout
+
+\begin_layout Itemize
+Name Namesberg: Some work done only by them.
+ 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-8"
+literal "false"
+
+\end_inset
+
+Settles, B.
+ (2009).
+ Active Learning Literature Survey (Computer Sciences Technical Report No.
+ 1648).
+ University of Wisconsin–Madison.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-9"
+literal "false"
+
+\end_inset
+
+Donggeun Yoo and In So Kweon.
+ Learning loss for active learning.
+ In CVPR, pages 93–102, 2019.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-10"
+literal "false"
+
+\end_inset
+
+Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas Usunier, Alexander
+ Kirillov, and Sergey Zagoruyko.
+ End-to-end object detection with transformers.
+ In ECCV, 2020
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-11"
+literal "false"
+
+\end_inset
+
+Mark Everingham, Luc Van Gool, Christopher KI Williams, John Winn, and Andrew
+ Zisserman.
+ The pascal visual object classes (voc) challenge.
+ International journal of computer vision, 88(2):303–338, 2010
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-3"
+literal "false"
+
+\end_inset
+
+Andreas Geiger, Philip Lenz, and Raquel Urtasun.
+ Are we ready for autonomous driving? the kitti vision benchmark suite.
+ In Conference on Computer Vision and Pattern Recognition (CVPR), 2012.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-12"
+literal "false"
+
+\end_inset
+
+Xin Wang, Yudong Chen, and Wenwu Zhu.
+ 2021.
+ A survey on curriculum learning.
+ IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-4"
+literal "false"
+
+\end_inset
+
+yukkyo (2021).
+ voc2coco.
+ GitHub.
+ Note: https://github.com/yukkyo/voc2coco.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-5"
+literal "false"
+
+\end_inset
+
+Moore, B., & Corso, J.
+ (2020).
+ FiftyOne.
+ GitHub.
+ Note: https://github.com/voxel51/fiftyone.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-6"
+literal "false"
+
+\end_inset
+
+McInnes, L., Healy, J., & Melville, J.
+ (2018).
+ UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction.
+ ArXiv e-prints.
+ 
+\end_layout
+
+\end_body
+\end_document

@@ -51,11 +51,10 @@ def save_filtered_inputevents():
     # create filtered inputevents files (by subject id and by subject id and medicine)
     input_events = pd.read_csv("data\icu\inputevents.csv")
     input_events_subject_id = input_events[input_events["subject_id"].isin(get_sepsis_subject_ids())]
-    input_events_subject_id.to_csv("filtered\\input_events_filtered_by_subject_id.csv")
     input_events_subject_id_itemid = input_events_subject_id[input_events_subject_id["itemid"].isin(get_inputevents_itemids())]
     input_events_subject_id_itemid = input_events_subject_id_itemid.merge(ITEM_IDS[["itemid", "label"]], left_on="itemid", right_on="itemid")
     input_events_subject_id_itemid = input_events_subject_id_itemid.rename(columns={"label":"itemid_label"})
-    input_events_subject_id_itemid.to_csv("filtered\\input_events_filtered_by_subject_id_and_medicine.csv")
+    input_events_subject_id_itemid.to_csv("filtered\\filtered_input_events.csv")
 
 def save_filtered_chartevents():
     filtered_chartevents = chunk_filtering.filter_big_file("data\icu\chartevents.csv", get_sepsis_subject_ids(), get_chartevents_itemids())
