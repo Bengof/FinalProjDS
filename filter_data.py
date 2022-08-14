@@ -92,6 +92,6 @@ def save_filtered_patients():
 
 def filter_short_stays_and_different_unit(inputevents, icustays_filtered):
     icustays_filtered = icustays_filtered[icustays_filtered["first_careunit"] == icustays_filtered["last_careunit"]]
-    icustays_filtered = icustays_filtered[icustays_filtered["los"] >= consts.MINIMAL_LOS]
+    icustays_filtered = icustays_filtered[icustays_filtered["los"] >= consts.MINIMAL_LOS_DAYS]
     inputevents = inputevents.merge(icustays_filtered[["stay_id", "first_careunit"]], left_on="stay_id", right_on="stay_id")
     return inputevents

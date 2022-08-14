@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 def get_events_beofore_dose(event_time, interval, stay_id, table, time_field, is_procedure=False):
     if is_procedure: 
@@ -16,3 +17,19 @@ def get_events_beofore_dose(event_time, interval, stay_id, table, time_field, is
     else: # procedure
         events = events[(events[time_field] >= event_time - interval) & (events[time_field] <= event_time)]
     return events
+
+
+def get_prev_dose(inputevents):
+    inputevents = inputevents.sort_values(by=["stay_id", "starttime"])
+    # convert to datetimes:
+    inputevents["starttime"] = pd.to_datetime(inputevents["starttime"])
+    inputevents["endtime"] = pd.to_datetime(inputevents["endtime"])
+    # add to each row its previous:
+    inputevents["prev_starttime"] = inputevents["starttime"].shift(1)
+    inputevents["prev_endtime"] = inputevents["endtime"].shift(1)
+    inputevents["prev_stay_id"] = inputevents["stay_id"].shift(1)
+    inputevents["prev_statusdescription"] = inputevents["statusdescription"].shift(1)
+    inputevents["prev_originalrate"] = inputevents["originalrate"].shift(1)
+    # delete rows that the preceding row is another stay id
+    inputevents.loc[inputevents["prev_stay_id"] != inputevents["stay_id"], "prev_starttime"] = np.nan
+    return inputevents

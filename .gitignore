@@ -1,6 +1,7 @@
 data/
 filtered/
 ignore/
+tmp/
 combined/
 
 # Byte-compiled / optimized / DLL files
