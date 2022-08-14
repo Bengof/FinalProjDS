@@ -69,3 +69,4 @@ BP_RANGES = ((0,44),(45,49),(50,54),(55,59),(60,64),(65,69),(70,74),(75,79),(80,
 # minimal gap between dose to previous dose in order to mark it as dose which is not a decision in Pause and Stopped statusdescription
 MINIMAL_GAP_MINUTES = 2
 
+PATH_TO_DATA = "../processed/"

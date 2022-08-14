@@ -157,30 +157,64 @@ Results
 
 \begin_layout Standard
 We divided the inputs data to groups according to their last blood pressure
- measurement before receiving the Norepinephrine.
- 
-\end_layout
-
-\begin_layout Standard
-After doing so, we want to check for each group the hypothesis that the
- treatment will be the same across different units, against the conjecture
- that tretmeant varies.
- Let 
-\begin_inset Formula $\mu_{M,}$
-\end_inset
-
- denote 
+ measurement before receiving the Norepinephrine:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-H_{0}:
+BP\ RANGES=\left[\underset{b_{0}}{\underbrace{(0,44)}},\underset{b_{1}}{\underbrace{(45,49)}},(50,54),(55,59),(60,64),(65,69),(70,74),(75,79),(80,84),(85,89),(90,94),(95,99),(100,104),(105,109),\underset{b_{14}}{\underbrace{(110,114)}},\underset{b_{15}}{\underbrace{(115,200)}}\right]
 \]
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+After doing so, we want to check for each group the hypothesis that the
+ treatment will be the same across different units, against the conjecture
+ that treatment varies.
+ Let 
+\begin_inset Formula $\mu_{M,b_{j}}$
+\end_inset
+
+ denote the expected value of the Medical ICU unit for the group with bp
+ in the range denoted as 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+, and likewise for 
+\begin_inset Formula $\mu_{S,b_{j}}$
+\end_inset
+
+(for Surgical ICU).
+ 
+\end_layout
+
+\begin_layout Standard
+We start by checking each of the 
+\begin_inset Formula $16$
+\end_inset
+
+ hypothesis separately: for each 
+\begin_inset Formula $j=0,\ldots,15$
+\end_inset
+
+ we test:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+H_{0} & :\mu_{M,b_{j}}=\mu_{S,b_{j}}\\
+H_{1} & :\mu_{M,b_{j}}\neq\mu_{S,b_{j}}
+\end{align*}
+
+\end_inset
+
+ We start with a baseline permutation test.
+ 
 \end_layout
 
 \begin_layout Subsection
