@@ -18,8 +18,8 @@ def create_filtered_files():
     # filter_data.save_filtered_transfers()
 
 
-def run_pipeline(count_samples_stay_ids=None, create_filtered_files=False):
-    if create_filtered_files:
+def run_pipeline(count_samples_stay_ids=None, create_filtered_files_flag=False):
+    if create_filtered_files_flag:
         create_filtered_files()
     input_events = pd.read_csv("filtered\\input_events_filtered_by_subject_id_and_medicine.csv")
     print("Read input events")
@@ -43,8 +43,7 @@ def run_pipeline(count_samples_stay_ids=None, create_filtered_files=False):
 
 
 if '__main__' == __name__:
-    create_filtered_files()
-    # inputevents_states_ok, inputevents_states_full = run_pipeline()
-    # inputevents_states_ok.to_csv("processed\\full_pipeline_ok_filtered.csv")
-    # inputevents_states_full.to_csv("processed\\full_pipeline_full.csv")
+    inputevents_states_ok, inputevents_states_full = run_pipeline()
+    inputevents_states_ok.to_csv("processed\\full_pipeline_ok_filtered.csv")
+    inputevents_states_full.to_csv("processed\\full_pipeline_full.csv")
 
