@@ -29,6 +29,7 @@ def mark_ne_events_that_overlap(df):
     """
     Marks events that overlap with other ne and other meds
     """
+    df = df.rename(columns={"Unnamed: 0": "input_index"})
     for stay_id in tqdm(df["stay_id"].unique()):
         patient_noreadrenaline = df[(df["stay_id"] == stay_id) & (df["itemid_label"] == "Norepinephrine")][["input_index", "starttime", "endtime", "statusdescription", "originalrate", "itemid_label", "State"]].sort_values(by="starttime")
         patient_full_inputs = df[(df["stay_id"] == stay_id) ][["input_index", "starttime", "endtime", "statusdescription", "originalrate", "itemid_label", "State"]].sort_values(by="starttime")
@@ -82,23 +83,10 @@ def mark_finishedrunning(inputs_df):
     
 
 def create_states(inputs_df):
-    inputs_df["State"] = np.nan
+    inputs_df["State"] = consts.State.OK
     inputs_df_with_states = mark_finishedrunning(inputs_df)
     inputs_df_with_states = mark_ne_events_that_overlap(inputs_df_with_states)
     inputs_df_with_states = mark_events_by_gap(inputs_df_with_states, "Stopped", consts.MINIMAL_GAP_MINUTES)
     inputs_df_with_states = mark_events_by_gap(inputs_df_with_states, "Paused", consts.MINIMAL_GAP_MINUTES)
     inputs_df_with_states = mark_epsilon(inputs_df_with_states, 0.001)
     return inputs_df_with_states
-    
-
-if '__main__' == __name__:
-    inputs_df = pd.read_csv("filtered\\input_events_filtered_by_subject_id_and_medicine.csv")
-    inputs_df = inputs_df.rename(columns={"Unnamed: 0": "input_index"})
-    icus_df = pd.read_csv("filtered\\filtered_icustays.csv")
-    # filtered_inputs_df = filter_data.filter_short_stays_and_different_unit(inputs_df, icus_df)
-    # select random 1000 stay_ids
-    np.random.seed(0)
-    stay_ids = icus_df["stay_id"].sample(n=1000)
-    filtered_inputs_df = inputs_df[inputs_df["stay_id"].isin(stay_ids)].copy()
-    inputs_with_states_df = create_states(filtered_inputs_df)
-    inputs_with_states_df.to_csv("tmp\\inputs_with_states.csv")

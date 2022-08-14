@@ -5,11 +5,6 @@ import os
 from tqdm import tqdm
 from enum import Enum
 
-class State(Enum):
-    OK = 0,
-    LESS_THAN_EPSILON = 1,
-    OVERLAPPED_WITH_DIFFERENT_MED = 2
-
 def check_if_change_in_rate_smaller_than_epsilon(df_inputs, stay_id, epsilon, status_description):
         input_for_patient = df_inputs[(df_inputs["stay_id"] == stay_id) & (df_inputs["statusdescription"] == status_description) &( df_inputs["itemid_label"] == "Norepinephrine")][["stay_id", "starttime", "endtime", "statusdescription", "originalrate", "rate", "itemid_label"]].sort_values(by="starttime")
         if input_for_patient.shape[0] == 0:
