@@ -85,8 +85,8 @@ def create_states(inputs_df):
     inputs_df["State"] = np.nan
     inputs_df_with_states = mark_finishedrunning(inputs_df)
     inputs_df_with_states = mark_ne_events_that_overlap(inputs_df_with_states)
-    inputs_df_with_states = mark_events_by_gap(inputs_df_with_states, "Stopped", consts.MINIMAL_GAP)
-    inputs_df_with_states = mark_events_by_gap(inputs_df_with_states, "Paused", consts.MINIMAL_GAP)
+    inputs_df_with_states = mark_events_by_gap(inputs_df_with_states, "Stopped", consts.MINIMAL_GAP_MINUTES)
+    inputs_df_with_states = mark_events_by_gap(inputs_df_with_states, "Paused", consts.MINIMAL_GAP_MINUTES)
     inputs_df_with_states = mark_epsilon(inputs_df_with_states, 0.001)
     return inputs_df_with_states
     
