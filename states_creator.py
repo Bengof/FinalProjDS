@@ -69,7 +69,7 @@ def mark_events_by_gap(inputs_df, statusdescription, gap_length):
     inputs_df = get_prev_dose(inputs_df)
     inputs_df["current_gap"] = inputs_df.starttime - inputs_df.prev_endtime
     inputs_df.loc[(inputs_df.prev_statusdescription == statusdescription) &\
-         (inputs_df.current_gap <= pd.Timedelta(gap_length)) &\
+         (inputs_df.current_gap <= pd.Timedelta(gap_length, unit="minutes")) &\
              (inputs_df.current_gap >= pd.Timedelta(0)) & \
          (np.isclose(inputs_df.originalrate, inputs_df.prev_originalrate)), "State"] \
         = GAP_STATUS_DESC_TO_STATE[statusdescription]
