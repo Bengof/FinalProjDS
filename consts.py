@@ -64,9 +64,21 @@ MAXIMAL_AGE = 90
 
 HOURS_BEFORE_DOSE = 1
 
-BP_RANGES = ((0,44),(45,49),(50,54),(55,59),(60,64),(65,69),(70,74),(75,79),(80,84),(85,89),(90,94),(95,99),(100,104),(105,109),(110,114),(115,200))
+#BP_RANGES = ((0,44),(45,49),(50,54),(55,59),(60,64),(65,69),(70,74),(75,79),(80,84),(85,89),(90,94),(95,99),(100,104),(105,109),(110,114),(115,200))
+BP_RANGES = ((0,49),(50,59),(60,64),(65,69),(70,74),(75,79),(80,89),(90,200))
 
 # minimal gap between dose to previous dose in order to mark it as dose which is not a decision in Pause and Stopped statusdescription
 MINIMAL_GAP_MINUTES = 2
 
 PATH_TO_DATA = "../processed/"
+
+# The maximal and minimal rates to consider while looking at doses "originalrate" field
+MINIMAL_ORIGINALRATE = 0
+MAXIMAL_ORIGINALRATE = 0.4
+
+# Distribution to examine
+DISTRIBUTIONS = ["pareto", "gamma", "beta", "lognorm", "genextreme", "dweibull"]
+
+# SICU and MICU names
+SICU = "Surgical Intensive Care Unit (SICU)"
+MICU = "Medical Intensive Care Unit (MICU)"
