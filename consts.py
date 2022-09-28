@@ -22,7 +22,7 @@ class State(Enum):
 
 ICD_CODES = ["99592", # Severe sepsis, icd_version =  9
              "R652", # Severe sepsis, icd_version = 10
-             "R6520", # Severe sepsis, icd_version = 10
+             "R6520", # Severe sepsis without septic shock, icd_version = 10
              "R6521",  # Severe sepsis with septic shock, icd_version = 10
              "99591" # Sepsis
              ]
