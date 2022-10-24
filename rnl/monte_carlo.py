@@ -12,11 +12,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from patient_simulator import PatientSimulator
 from utils import max_dict, print_values, print_policy
+from rnl_consts import *
 
 GAMMA = 0.9
 EPSILON=0.2
 ALL_POSSIBLE_ACTIONS = np.arange(0, 0.4, 0.01)
-N_EPISODES = 10000
+N_EPISODES = 10
 
 # epsilon greedy action selection
 def epsilon_action(a, eps=0.1):
@@ -26,12 +27,12 @@ def epsilon_action(a, eps=0.1):
   else:
     return np.random.choice(ALL_POSSIBLE_ACTIONS)
 
-def play_game(grid, policy):
+def play_game(policy):
   # returns a list of states and corresponding returns
   # s = (2, 0)
   # grid.set_state(s)
   patient = PatientSimulator()
-  s = patient.bp
+  s = patient.bp_category
   a = epsilon_action(policy[s], EPSILON)
 
   # keep in mind that reward is lagged by one time step
@@ -64,16 +65,20 @@ def play_game(grid, policy):
   return states_actions_returns
 
 
-def monte_carlo(grid):
-  # initialize a random policy
+def init_random_policy():
   policy = {}
-  for s in grid.actions.keys():
+  for s in BINS: # for s in states
     policy[s] = np.random.choice(ALL_POSSIBLE_ACTIONS)
+  return policy
+
+def monte_carlo():
+  # initialize a random policy
+  policy = init_random_policy()
 
   # initialize Q(s,a) and returns
   Q = {}
   returns = {} # dictionary of state -> list of returns we've received
-  states = grid.non_terminal_states()
+  states = BINS
   for s in states:
     Q[s] = {}
     for a in ALL_POSSIBLE_ACTIONS:
@@ -84,12 +89,12 @@ def monte_carlo(grid):
   deltas = []
   # repeat for the number of episodes specified (enough that it converges)
   for t in range(N_EPISODES):
-    if t % 1000 == 0:
+    if t % 1 == 0:
       print(t)
 
     # generate an episode using the current policy
     biggest_change = 0
-    states_actions_returns = play_game(grid, policy)
+    states_actions_returns = play_game(policy)
 
     # calculate Q(s,a)
     seen_state_action_pairs = set()
@@ -120,19 +125,32 @@ def monte_carlo(grid):
   return V, policy, deltas
 
 
+def test():
+  policy = init_random_policy()
+  print(f"initial policy: {policy}")
+  print("starting game...")
+  states_actions_returns = play_game(policy)
+  print("states and actions: ", states_actions_returns)
+
+
 if __name__ == '__main__':
-  grid = standard_grid(obey_prob=0.9, step_cost=None)
+  # test()
+  V, policy, deltas = monte_carlo()
 
-  # print rewards
-  print("rewards:")
-  print_values(grid.rewards, grid)
 
-  V, policy, deltas = monte_carlo(grid)
+# if __name__ == '__main__':
+#   grid = standard_grid(obey_prob=0.9, step_cost=None)
 
-  print("final values:")
-  print_values(V, grid)
-  print("final policy:")
-  print_policy(policy, grid)
+#   # print rewards
+#   print("rewards:")
+#   print_values(grid.rewards, grid)
 
-  plt.plot(deltas)
-  plt.show()
+#   V, policy, deltas = monte_carlo(grid)
+
+#   print("final values:")
+#   print_values(V, grid)
+#   print("final policy:")
+#   print_policy(policy, grid)
+
+#   plt.plot(deltas)
+#   plt.show()
