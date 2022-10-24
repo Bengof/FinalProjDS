@@ -4,6 +4,7 @@
 # Credit goes to LazyProgrammer
 from __future__ import print_function, division
 from builtins import range
+from tkinter import S
 # Note: you may need to update your version of future
 # sudo pip install -U future
 
@@ -27,17 +28,19 @@ def epsilon_action(a, eps=0.1):
 
 def play_game(grid, policy):
   # returns a list of states and corresponding returns
-  s = (2, 0)
-  grid.set_state(s)
+  # s = (2, 0)
+  # grid.set_state(s)
+  patient = PatientSimulator()
+  s = patient.bp
   a = epsilon_action(policy[s], EPSILON)
 
   # keep in mind that reward is lagged by one time step
   # r(t) results from taking action a(t-1) from s(t-1) and landing in s(t)
   states_actions_rewards = [(s, a, 0)]
   while True:
-    r = grid.move(a)
-    s = grid.current_state()
-    if grid.game_over():
+    s, r = patient.move(a)
+    # s = grid.current_state()
+    if patient.game_over():
       states_actions_rewards.append((s, None, r))
       break
     else:
