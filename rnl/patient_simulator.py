@@ -79,6 +79,10 @@ class PatientSimulator:
         self.bp = new_bp_row.next_bp.values[0]
         self.bp_category = new_bp_row.next_bp_category.values[0]
         self.is_game_over = new_bp_row["last"].values[0]
+        if self.bp <= 0:
+            self.bp = 0
+            self.is_game_over = True
+            self.bp_category = BINS[0]
 
         # return the new state and reward
         return self.bp_category, self.__get_square_dist_from_target()

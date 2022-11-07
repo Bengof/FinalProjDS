@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 from patient_simulator import PatientSimulator
 from utils import max_dict, print_values, print_policy
 from rnl_consts import *
+from tqdm import tqdm
 
 GAMMA = 0.9
 EPSILON=0.2
@@ -80,18 +81,15 @@ def monte_carlo():
   returns = {} # dictionary of state -> list of returns we've received
   states = BINS
   for s in states:
-    Q[s] = {}
+    Q[str(s)] = {}
     for a in ALL_POSSIBLE_ACTIONS:
-      Q[s][a] = 0
-      returns[(s,a)] = []
+      Q[str(s)][a] = 0
+      returns[(str(s),a)] = []
   
   # keep track of how much our Q values change each episode so we can know when it converges
   deltas = []
   # repeat for the number of episodes specified (enough that it converges)
-  for t in range(N_EPISODES):
-    if t % 1 == 0:
-      print(t)
-
+  for t in tqdm(range(N_EPISODES)):
     # generate an episode using the current policy
     biggest_change = 0
     states_actions_returns = play_game(policy)
@@ -134,8 +132,15 @@ def test():
 
 
 if __name__ == '__main__':
-  test()
-  # V, policy, deltas = monte_carlo()
+  # test()
+  # import os
+  # print(os.getcwd())
+  V, policy, deltas = monte_carlo()
+  from pickle import dump
+  dump(V, open('V.pkl', 'wb'))
+  dump(policy, open('policy.pkl', 'wb'))
+  dump(deltas, open('deltas.pkl', 'wb'))
+
 
 
 # if __name__ == '__main__':
