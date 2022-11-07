@@ -134,3 +134,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 BpData/bps_with_doses.csv
+RNLData/bps_with_doses_sanity.csv
+RNLData/bps_with_doses.csv

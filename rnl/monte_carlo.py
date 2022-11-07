@@ -42,7 +42,7 @@ def play_game(policy):
     s, r = patient.move(a)
     # s = grid.current_state()
     if patient.game_over():
-      states_actions_rewards.append((s, None, r))
+      # states_actions_rewards.append((s, None, r))
       break
     else:
       a = epsilon_action(policy[s], EPSILON)
@@ -68,7 +68,7 @@ def play_game(policy):
 def init_random_policy():
   policy = {}
   for s in BINS: # for s in states
-    policy[s] = np.random.choice(ALL_POSSIBLE_ACTIONS)
+    policy[str(s)] = np.random.choice(ALL_POSSIBLE_ACTIONS)
   return policy
 
 def monte_carlo():
