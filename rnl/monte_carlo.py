@@ -134,8 +134,8 @@ def test():
 
 
 if __name__ == '__main__':
-  # test()
-  V, policy, deltas = monte_carlo()
+  test()
+  # V, policy, deltas = monte_carlo()
 
 
 # if __name__ == '__main__':
