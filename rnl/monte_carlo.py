@@ -18,7 +18,7 @@ from tqdm import tqdm
 GAMMA = 0.9
 EPSILON=0.2
 ALL_POSSIBLE_ACTIONS = np.arange(0, 0.4, 0.01)
-N_EPISODES = 10
+N_EPISODES = 1000
 
 # epsilon greedy action selection
 def epsilon_action(a, eps=0.1):
@@ -46,7 +46,15 @@ def play_game(policy):
       # states_actions_rewards.append((s, None, r))
       break
     else:
-      a = epsilon_action(policy[s], EPSILON)
+      if str(s) == 'nan':
+        print("patient nan recieved")
+        patient.game_over = True
+        break
+      try:
+        a = epsilon_action(policy[s], EPSILON)
+      except KeyError:
+        print(f"catched KeyError s={s}")
+        break
       states_actions_rewards.append((s, a, r))
 
   # calculate the returns by working backwards from the terminal state

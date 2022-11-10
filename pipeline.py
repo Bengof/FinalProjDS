@@ -50,7 +50,7 @@ def _read_bp_rnl(chartevents_path):
     bps = bps.rename(columns={"value": "cur_bp", "charttime":"cur_bp_time"})
     bps = bps.drop(columns=["Unnamed: 0", "Unnamed: 0.1", "valuenum", "warning", "itemid_label", "storetime", "valueuom"])
     # remove bps > 200 and < 0
-    bps = bps[(bps.cur_bp <= 200) & (bps.cur_bp >= 0)]
+    bps = bps[(bps.cur_bp < 200) & (bps.cur_bp >= 0)]
     return bps
 
 def doses_per_stay_id(stay_id, bps, doses):
@@ -125,5 +125,5 @@ if '__main__' == __name__:
     # inputevents_states_ok.to_csv("processed\\full_pipeline_ok_filtered.csv")
     # inputevents_states_full.to_csv("processed\\full_pipeline_full.csv")
     bp_rnl = generate_rnl_bp_events("filtered\\filtered_chartevents.csv", "processed\\full_pipeline_ok_filtered.csv")
-    bp_rnl.to_csv("RNLData\\bps_with_doses_sanity.csv")
+    bp_rnl.to_csv("RNLData\\bps_with_doses_fixed.csv")
 

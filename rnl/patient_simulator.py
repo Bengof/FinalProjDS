@@ -3,7 +3,7 @@ import numpy as np
 
 # DATA_PATH = "../processed/full_pipeline_ok_filtered.csv" #TODO: have a file with dose=0
 # DATA_PATH = "rnl\dummy_data\dummy_data.csv"
-DATA_PATH = "RNLData/bps_with_doses_sanity.csv"
+DATA_PATH = "RNLData/bps_with_doses_fixed.csv"
 TARGET_BP = 65
 # BINS = pd.IntervalIndex.from_tuples([(40, 60), (60, 80), (80, 100), (100, 120), (120, 140), (140, 160), (160, 180), (180, 200)])
 from rnl_consts import *
