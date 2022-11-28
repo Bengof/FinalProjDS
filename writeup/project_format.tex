@@ -1,0 +1,183 @@
+%% LyX 2.3.4.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,english]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+\usepackage{babel}
+\usepackage{refstyle}
+\usepackage{float}
+\usepackage{amstext}
+\usepackage{graphicx}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+
+\AtBeginDocument{\providecommand\figref[1]{\ref{fig:#1}}}
+\AtBeginDocument{\providecommand\subsecref[1]{\ref{subsec:#1}}}
+\AtBeginDocument{\providecommand\parref[1]{\ref{par:#1}}}
+\AtBeginDocument{\providecommand\tabref[1]{\ref{tab:#1}}}
+\AtBeginDocument{\providecommand\secref[1]{\ref{sec:#1}}}
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\providecommand{\algorithmname}{Algorithm}
+\floatname{algorithm}{\protect\algorithmname}
+\RS@ifundefined{subsecref}
+  {\newref{subsec}{name = \RSsectxt}}
+  {}
+\RS@ifundefined{thmref}
+  {\def\RSthmtxt{theorem~}\newref{thm}{name = \RSthmtxt}}
+  {}
+\RS@ifundefined{lemref}
+  {\def\RSlemtxt{lemma~}\newref{lem}{name = \RSlemtxt}}
+  {}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\newenvironment{lyxcode}
+	{\par\begin{list}{}{
+		\setlength{\rightmargin}{\leftmargin}
+		\setlength{\listparindent}{0pt}% needed for AMS classes
+		\raggedright
+		\setlength{\itemsep}{0pt}
+		\setlength{\parsep}{0pt}
+		\normalfont\ttfamily}%
+	 \item[]}
+	{\end{list}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\newcommand{\indep}{\perp \!\!\! \perp}
+
+\makeatother
+
+\begin{document}
+\title{Some Project Title}
+\author{Name Nameson, Name Namesberg}
+\maketitle
+
+\section{Abstract}
+
+Up to 250 words, similar to abstracts in articles.
+
+\section{Introduction}
+Two to three written pages, figures are strongly encouraged but are not included in the page count. 
+Needs to include a description of the problem and the data and of the research question in hand.
+
+\subsection{Background}
+
+Some general background to the problem.
+
+\subsubsection{A Possible Dive Into a Specific Relevant Topic}
+
+
+
+\subsubsection{Another Possible Dive}
+
+
+
+\subsection{Related Work}
+
+Covering relevant past research and works, should include citations in a clear and consistent format.
+
+\subsection{Data}
+ 
+
+\section{Results}
+
+A description of the research results.
+Try to make it clear how the results you show relate to the research questions, add figures.
+We recommend using different subsections for different results,
+
+\subsection{An Informative Subsection Title Regarding Some Experiments and Results}
+
+Accompanied by relevant plots, figures and tables.
+
+\subsection{Another Informative Subsection Title Regarding Some Different Experiments and Results}
+Also containing relevant visuals.
+
+\section{Discussion}
+About 2 written pages, discussing the results and their implications.
+
+\subsection{A Brief Summary of the Results in Retrospective }
+
+\subsection{Conclusions Based on the Results}
+
+
+\subsection{Limitations}
+
+A critical discussion on the work's limitations, simplifying assumptions, possible biases etc, and their possible effects on the results and the conclusions.
+
+
+\subsection{Future Work}
+A discussion on relevant future work, maybe taking into account the current limitations and possible solutions to them. 
+
+
+
+\section{Resources and Methods}
+
+\subsection{Preprocessing}
+
+
+
+\subsection{Statistical Methods and Considerations}
+
+
+\subsection{Models and ML Methods Used}
+If they were not thoroughly discussed earlier. 
+Maybe relevant model training details.
+
+\subsection{Resources}
+
+
+\subsection{Work Pipeline}
+A description and a flowchart of the work pipeline 
+
+
+\subsection*{Division of work}
+If you split the responsibilities. 
+\begin{itemize}
+\item Name Nameson: Some work done only by them.
+\item Name Namesberg: Some work done only by them.
+\end{itemize}
+\begin{thebibliography}{1}
+\bibitem{key-8}Settles, B. (2009). Active Learning Literature Survey
+(Computer Sciences Technical Report No. 1648). University of Wisconsin--Madison. 
+
+\bibitem{key-9}Donggeun Yoo and In So Kweon. Learning loss for active
+learning. In CVPR, pages 93--102, 2019.
+
+\bibitem{key-10}Nicolas Carion, Francisco Massa, Gabriel Synnaeve,
+Nicolas Usunier, Alexander Kirillov, and Sergey Zagoruyko. End-to-end
+object detection with transformers. In ECCV, 2020
+
+\bibitem{key-11}Mark Everingham, Luc Van Gool, Christopher KI Williams,
+John Winn, and Andrew Zisserman. The pascal visual object classes
+(voc) challenge. International journal of computer vision, 88(2):303--338,
+2010
+
+\bibitem{key-3}Andreas Geiger, Philip Lenz, and Raquel Urtasun. Are
+we ready for autonomous driving? the kitti vision benchmark suite.
+In Conference on Computer Vision and Pattern Recognition (CVPR), 2012.
+
+\bibitem{key-12}Xin Wang, Yudong Chen, and Wenwu Zhu. 2021. A survey
+on curriculum learning. IEEE Transactions on Pattern Analysis and
+Machine Intelligence (TPAMI)
+
+\bibitem{key-4}yukkyo (2021). voc2coco. GitHub. Note: https://github.com/yukkyo/voc2coco. 
+
+\bibitem{key-5}Moore, B., \& Corso, J. (2020). FiftyOne. GitHub.
+Note: https://github.com/voxel51/fiftyone. 
+
+\bibitem{key-6}McInnes, L., Healy, J., \& Melville, J. (2018). UMAP:
+Uniform Manifold Approximation and Projection for Dimension Reduction.
+ArXiv e-prints.
+\end{thebibliography}
+
+\end{document}
