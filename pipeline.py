@@ -43,7 +43,7 @@ def run_pipeline(count_samples_stay_ids=None, create_filtered_files_flag=False):
 
 
 if '__main__' == __name__:
-    inputevents_states_ok, inputevents_states_full = run_pipeline()
+    inputevents_states_ok, inputevents_states_full = run_pipeline(create_filtered_files_flag=True)
     inputevents_states_ok.to_csv("processed\\full_pipeline_ok_filtered.csv")
     inputevents_states_full.to_csv("processed\\full_pipeline_full.csv")
 

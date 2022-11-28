@@ -163,7 +163,7 @@ We divided the inputs data to groups according to their last blood pressure
 \begin_layout Standard
 \begin_inset Formula 
 \[
-BP\ RANGES=\left[\underset{b_{0}}{\underbrace{(0,44)}},\underset{b_{1}}{\underbrace{(45,49)}},(50,54),(55,59),(60,64),(65,69),(70,74),(75,79),(80,84),(85,89),(90,94),(95,99),(100,104),(105,109),\underset{b_{14}}{\underbrace{(110,114)}},\underset{b_{15}}{\underbrace{(115,200)}}\right]
+BP\ RANGES=\left[\underset{b_{0}}{\underbrace{(0,44)}},\underset{b_{1}}{\underbrace{(45,49)}},\underset{b_{2}}{\underbrace{(50,54)}},\ldots,\underset{b_{13}}{\underbrace{(105,109)}},\underset{b_{14}}{\underbrace{(110,114)}},\underset{b_{15}}{\underbrace{(115,200)}}\right]
 \]
 
 \end_inset
@@ -275,6 +275,166 @@ Resources and Methods
 
 \begin_layout Subsection
 Preprocessing
+\end_layout
+
+\begin_layout Standard
+In order to work nimbly, we created a subset of the relevant data from all
+ the possible data that MIMIC-IV offers.
+ The subset was creaded by applying the following folters:
+\end_layout
+
+\begin_layout Subsubsection
+Patients Filters
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Sepsis ICD codes
+\series default
+ - Keep only the following ICD (International Classification of Disease)
+ codes:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+99592 - Severe sepsis, ICD version 9
+\end_layout
+
+\begin_layout Itemize
+99591 - Sepsis, ICD version 9
+\end_layout
+
+\begin_layout Itemize
+R652 - Severe sepsis, ICD vesion 10
+\end_layout
+
+\begin_layout Itemize
+R6520 - Severe sepsis without septic shock, ICD version 10
+\end_layout
+
+\begin_layout Itemize
+R6521 - Severe sepsis with septic shock, ICD version 10
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Age
+\series default
+ - Keep only patients between ages 20 to 90.
+\end_layout
+
+\begin_layout Subsubsection
+Stays Filters
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Unit
+\series default
+ - Keep only stays that start and end in the same unit.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Length
+\series default
+ - Keep only stays of at least one day.
+\end_layout
+
+\begin_layout Subsubsection
+Chart Events Filters
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+HR and BP events
+\series default
+ - Keep only the events of blood pressure and heart rate, with the following
+ MIMIC codes:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+225312 - ART BP Mean 
+\end_layout
+
+\begin_layout Itemize
+220052 - Arterial Blood Pressure mean 
+\end_layout
+
+\begin_layout Itemize
+220181 - Non Invasive Blood Pressure mean 
+\end_layout
+
+\begin_layout Itemize
+220045 - Heart Rate
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Input Events Filters
+\end_layout
+
+\begin_layout Enumerate
+Norepinephrine and its alternatives:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+221906 - Norepinephrine
+\end_layout
+
+\begin_layout Itemize
+221662 - Dopamine
+\end_layout
+
+\begin_layout Itemize
+221289 - Epinephrine
+\end_layout
+
+\begin_layout Itemize
+221749 - Phenylephrine
+\end_layout
+
+\begin_layout Itemize
+229617 - Epinephrine
+\end_layout
+
+\begin_layout Itemize
+229630 - Phenylephrine (50/250) 
+\end_layout
+
+\begin_layout Itemize
+229631 - Phenylephrine (200/250)_OLD_1
+\end_layout
+
+\begin_layout Itemize
+229632 - Phenylephrine (200/250)
+\end_layout
+
+\begin_layout Itemize
+229789 - Phenylephrine (Intubation)
+\end_layout
+
+\begin_layout Itemize
+222315 - Vasopressin
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Combing all together
+\end_layout
+
+\begin_layout Standard
+By applying all the filters we got 754 MB that we could load into the memory
+ freely instead of 70 GB of MIMIC data.
+ 
 \end_layout
 
 \begin_layout Subsection

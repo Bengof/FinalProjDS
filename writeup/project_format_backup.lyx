@@ -428,13 +428,82 @@ Norepinephrine and its alternatives:
 
 \end_deeper
 \begin_layout Subsubsection
-Combing all together
+Interim summary of data filters
 \end_layout
 
 \begin_layout Standard
 By applying all the filters we got 754 MB that we could load into the memory
  freely instead of 70 GB of MIMIC data.
  
+\end_layout
+
+\begin_layout Subsubsection
+Decisions Filter
+\end_layout
+
+\begin_layout Standard
+The main part of the project is analyzing the decision making of the medical
+ teams.
+ Since the most important part if thehuman decision, The idea of decision
+ filter is to keep only events of doses that were taken by a medical authority,
+ and were not recorded automatically.
+ In contrast to the previous filters, in which data was kept because of
+ accurate condition that was fulfilled, the case of decisions filter is
+ different.
+ There is no field in the data that indicates if the dose recorded due to
+ a decision of a human or not.
+\begin_inset Newline linebreak
+\end_inset
+
+Since there is no such field, we need to define what decision is by other
+ propereties we do have:
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+FinishedRunning status description
+\series default
+ - there are 5 status descriptions in the input event files, and one of
+ them is 
+\begin_inset Quotes eld
+\end_inset
+
+FinishedRunning
+\begin_inset Quotes erd
+\end_inset
+
+.
+ by the documentation of MIMIC-IV that status means: 
+\begin_inset Quotes eld
+\end_inset
+
+The delivery of the item has finished (most frequently, the bag containing
+ the compound is empty)
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "mimic-doc"
+literal "false"
+
+\end_inset
+
+.
+ It infers that those records are not an active decision of a human.
+ Deeper investigation of those records shows that indeed the rate of those
+ records is not one that human will decide to type manually (like 0.080032155,
+ 0.10005264, 0.3417207 )
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Previous dose was stopped or paused within short time gap
+\series default
+ - sdgsd
 \end_layout
 
 \begin_layout Subsection
@@ -479,6 +548,18 @@ Name Nameson: Some work done only by them.
 \begin_layout Itemize
 Name Namesberg: Some work done only by them.
  
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "mimic-doc"
+literal "false"
+
+\end_inset
+
+MIMIC-IV documentation.
+ Note: https://mimic.mit.edu/docs/iv/modules/icu/inputevents/
 \end_layout
 
 \begin_layout Bibliography
