@@ -145,9 +145,9 @@ if __name__ == '__main__':
   # print(os.getcwd())
   V, policy, deltas = monte_carlo()
   from pickle import dump
-  dump(V, open('V.pkl', 'wb'))
-  dump(policy, open('policy.pkl', 'wb'))
-  dump(deltas, open('deltas.pkl', 'wb'))
+  dump(V, open('artifacts/V.pkl', 'wb'))
+  dump(policy, open('artifacts/policy.pkl', 'wb'))
+  dump(deltas, open('artifacts/deltas.pkl', 'wb'))
 
 
 

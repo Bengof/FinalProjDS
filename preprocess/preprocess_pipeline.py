@@ -1,7 +1,7 @@
 import numpy as np
 import filter_data
 import pandas as pd
-from bp_for_dose import get_relevant_doses_with_bp
+from preprocess.bp_for_dose import get_relevant_doses_with_bp
 import filter_data
 from tqdm import tqdm
 from rnl.rnl_consts import *
@@ -24,9 +24,9 @@ def run_pipeline(count_samples_stay_ids=None, create_filtered_files_flag=False):
         create_filtered_files()
     input_events = pd.read_csv("filtered\\input_events_filtered_by_subject_id_and_medicine.csv")
     print("Read input events")
-    chart_events = pd.read_csv("filtered\\filtered_chartevents.csv")
+    chart_events = pd.read_csv("../filtered/filtered_chartevents.csv")
     print("Read chart events")
-    icus_events = pd.read_csv("filtered\\filtered_icustays.csv")
+    icus_events = pd.read_csv("../filtered/filtered_icustays.csv")
     print("Read icustays")
 
 
@@ -121,9 +121,9 @@ def generate_rnl_bp_events(chartevents_path, decisions_after_pipeline_path):
 
 
 if '__main__' == __name__:
-    # inputevents_states_ok, inputevents_states_full = run_pipeline(create_filtered_files_flag=True)
-    # inputevents_states_ok.to_csv("processed\\full_pipeline_ok_filtered.csv")
+    inputevents_states_ok, inputevents_states_full = run_pipeline(create_filtered_files_flag=True)
+    inputevents_states_ok.to_csv("processed\\full_pipeline_ok_filtered.csv")
     # inputevents_states_full.to_csv("processed\\full_pipeline_full.csv")
-    bp_rnl = generate_rnl_bp_events("filtered\\filtered_chartevents.csv", "processed\\full_pipeline_ok_filtered.csv")
-    bp_rnl.to_csv("RNLData\\bps_with_doses_fixed.csv")
+    # bp_rnl = generate_rnl_bp_events("../filtered/filtered_chartevents.csv", "processed\\full_pipeline_ok_filtered.csv")
+    # bp_rnl.to_csv("RNLData\\bps_with_doses_fixed.csv")
 

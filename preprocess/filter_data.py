@@ -5,11 +5,11 @@ import consts
 import importlib
 importlib.reload(consts)
 
-ITEM_IDS = pd.read_csv("data\icu\d_items.csv")
-D_ICD_DIAGNOSIS = pd.read_csv("data\hosp\d_icd_diagnoses.csv")
-DIAGNOSES_ICD = pd.read_csv("data\hosp\diagnoses_icd.csv")
-PATIENTS = pd.read_csv("data\core\patients.csv")
-LABITEMS = pd.read_csv("data\hosp\d_labitems.csv")
+ITEM_IDS = pd.read_csv("../data/icu/d_items.csv")
+D_ICD_DIAGNOSIS = pd.read_csv("../data/hosp/d_icd_diagnoses.csv")
+DIAGNOSES_ICD = pd.read_csv("../data/hosp/diagnoses_icd.csv")
+PATIENTS = pd.read_csv("../data/core/patients.csv")
+LABITEMS = pd.read_csv("../data/hosp/d_labitems.csv")
 
 
 def get_chartevents_itemids():
@@ -33,7 +33,7 @@ def get_procedureevents_itemids():
     
 
 def get_sepsis_subject_ids():
-    filtered_sepsis = pd.read_csv("filtered\\filtered_patients.csv")
+    filtered_sepsis = pd.read_csv("../filtered/filtered_patients.csv")
     return filtered_sepsis["subject_id"]
 
 
@@ -49,7 +49,7 @@ def filter_small_file(input_path, subject_ids, itemids=None):
 
 def save_filtered_inputevents():
     # create filtered inputevents files (by subject id and by subject id and medicine)
-    input_events = pd.read_csv("data\icu\inputevents.csv")
+    input_events = pd.read_csv("../data/icu/inputevents.csv")
     input_events_subject_id = input_events[input_events["subject_id"].isin(get_sepsis_subject_ids())]
     input_events_subject_id_itemid = input_events_subject_id[input_events_subject_id["itemid"].isin(get_inputevents_itemids())]
     input_events_subject_id_itemid = input_events_subject_id_itemid.merge(ITEM_IDS[["itemid", "label"]], left_on="itemid", right_on="itemid")
@@ -57,25 +57,25 @@ def save_filtered_inputevents():
     input_events_subject_id_itemid.to_csv("filtered\\filtered_input_events.csv")
 
 def save_filtered_chartevents():
-    filtered_chartevents = chunk_filtering.filter_big_file("data\icu\chartevents.csv", get_sepsis_subject_ids(), get_chartevents_itemids())
+    filtered_chartevents = chunk_filtering.filter_big_file("../data/icu/chartevents.csv", get_sepsis_subject_ids(), get_chartevents_itemids())
     filtered_chartevents = filtered_chartevents.merge(ITEM_IDS[["itemid", "label"]], left_on="itemid", right_on="itemid")
     filtered_chartevents = filtered_chartevents.rename(columns={"label":"itemid_label"})
     filtered_chartevents.to_csv("filtered\\filtered_chartevents.csv")
 
 def save_filtered_icustays():
-    filtered_icustays = chunk_filtering.filter_big_file("data\icu\icustays.csv", get_sepsis_subject_ids())
+    filtered_icustays = chunk_filtering.filter_big_file("../data/icu/icustays.csv", get_sepsis_subject_ids())
     filtered_icustays.to_csv("filtered\\filtered_icustays.csv")
 
 def save_filtered_procedureevents():
-    filtered_procedureevents = filter_small_file("data\\icu\\procedureevents.csv", get_sepsis_subject_ids(), get_procedureevents_itemids())
+    filtered_procedureevents = filter_small_file("../data/icu/procedureevents.csv", get_sepsis_subject_ids(), get_procedureevents_itemids())
     filtered_procedureevents.to_csv("filtered\\filtered_procedureevents.csv")
 
 def save_filtered_transfers():
-    filtered_procedureevents = filter_small_file("data\\core\\transfers.csv", get_sepsis_subject_ids())
+    filtered_procedureevents = filter_small_file("../data/core/transfers.csv", get_sepsis_subject_ids())
     filtered_procedureevents.to_csv("filtered\\filtered_transfers.csv")
 
 def save_filtered_labevents():
-    filtered_labevents = chunk_filtering.filter_big_file("data\hosp\labevents.csv", get_sepsis_subject_ids(), get_labevents_itemids())
+    filtered_labevents = chunk_filtering.filter_big_file("../data/hosp/labevents.csv", get_sepsis_subject_ids(), get_labevents_itemids())
     filtered_labevents = filtered_labevents.merge(LABITEMS[["itemid", "label"]], left_on="itemid", right_on="itemid")
     filtered_labevents = filtered_labevents.rename(columns={"label":"itemid_label"})
     filtered_labevents = filtered_labevents.drop(filtered_labevents[filtered_labevents["value"] == "-"].index)

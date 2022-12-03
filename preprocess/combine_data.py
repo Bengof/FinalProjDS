@@ -52,7 +52,7 @@ def windowing_for_row(input_events_row, interval, type):
   stay_id = input_events_row["stay_id"]
   event_time = input_events_row["starttime"]
   config = WINDOWING_CONFIG[type]
-  pe_chartevents = preceding_events.get_events_beofore_dose(event_time, interval, stay_id, config["table"], config["time_field"], type=="procedure")
+  pe_chartevents = preceding_events.get_events_beofore_dose(event_time, interval, stay_id, config["table"], config["time_field"], type == "procedure")
   events = pe_chartevents[pe_chartevents["itemid"].isin(config["itemid"])]  
   return window_statistics(events, type)
 
