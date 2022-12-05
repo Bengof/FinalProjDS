@@ -115,10 +115,6 @@ Up to 250 words, similar to abstracts in articles.
 Introduction
 \end_layout
 
-\begin_layout Subsection
-Medical Background and Past Works 
-\end_layout
-
 \begin_layout Standard
 Sepsis is a life threating condition that may arise as a response to an
  infection.
@@ -230,7 +226,7 @@ Bray A, Kampouraki E, Winter A, Jesuthasan A, Messer B, Graziadio S.
 \begin_layout Standard
 It is only natural that attempts at harnessing Artifcial Intelligence for
  this task will come about.
- Such was the vast work published in 2018 Nature Medicine (
+ Such was the vast work published 2018 Nature Medicine (
 \shape italic
 The Artificial Intelligence Clinician learns optimal treatment strategies
  for sepsis in intensive care
@@ -252,8 +248,8 @@ noprefix "false"
 
  based model was developed to suggest optimal treatment patterns: mainly
  doses of Vasopressors and IV fluids.
- The target of the model was to reduce the patients' mortality as much as
- possible, be it in the ICU or 90-day mortatlity.
+ The target of the model was to limit the patients' mortality, be it in
+ the ICU or 90-day mortatlity.
  The model included a set of 48 patient variables: from demographics, to
  vitals signs and labratory results.
  
@@ -289,7 +285,6 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename 2018_policy_boxplots.png
-	scale 40
 
 \end_inset
 
@@ -298,16 +293,14 @@ status open
 
 \end_inset
 
- it is apparent that the AI preformed better than human clinicians.
- However, it is alarming to see that on average, 
+ it is apparent that the AI preformed better than human clinicians However,
+ it is alarming to see that on average, 
 \series bold
-no interference policy was actually better, 
+no interference policy was actually better 
 \series default
-in terms of estimated policy value,
-\series bold
+than both the AI and the human clincian's policy, in terms of estimated
+ value.
  
-\series default
-than both the AI and the human clincian's policy.
 \end_layout
 
 \begin_layout Standard
@@ -334,69 +327,9 @@ Jeter, R., Josef, C., Shashikumar, S., & Nemati, S.
  focus of the 2018 work on long term rewards: hospital and 90-days morbidity.
  It disregarded the importance of intermediate short term rewards, in particular
  stablizing a patient's vitals and mainting their MAP in the recommended
- values, which bares more resemblance to a clinican's methodology in decsion
+ values, which is more similar to the clinican's methodology in decsion
  making.
  
-\end_layout
-
-\begin_layout Subsection
-Data
-\end_layout
-
-\begin_layout Standard
-The abovementioned works were trained on MIMIC-III (Medical Information
- Mart for Intensive Care) - a publicly available database of patients admitted
- to the Beth Israel Deaconess Medical Center (BIDMC) in Boston, USA, published
- in 2016
-\end_layout
-
-\begin_layout Standard
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Johnson, A.
- E.
- W., Pollard, T.
- J., Shen, L., Lehman, L.
- H., Feng, M., Ghassemi, M., Moody, B., Szolovits, P., Celi, L.
- A., & Mark, R.
- G.
- (2016).
- MIMIC-III, a freely accessible critical care database.
- Scientific Data, 3, 160035.
-\end_layout
-
-\end_inset
-
-.
- In March 2021 a new version of MIMC was released - MIMIC-IV.
- It contains deidentified data of 383,220 patients admitted to an intensive
- care unit, publicly available - 50,048 
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Johnson, A., Bulgarelli, L., Pollard, T., Horng, S., Celi, L.
- A., & Mark, R.
- (2022).
- MIMIC-IV (version 2.1).
- PhysioNet.
- https://doi.org/10.13026/rrgf-xw32.
-\end_layout
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Subsection
-Areas of focus in our work
-\end_layout
-
-\begin_layout Itemize
-reassess the treatmant variablity in the data between different ICU units
 \end_layout
 
 \begin_layout Standard
@@ -407,7 +340,7 @@ Two to three written pages, figures are strongly encouraged but are not
 \end_layout
 
 \begin_layout Subsection
-Mathematical Background
+Background
 \end_layout
 
 \begin_layout Standard
