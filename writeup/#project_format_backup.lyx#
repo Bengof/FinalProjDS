@@ -737,7 +737,6 @@ status open
 \align center
 \begin_inset Graphics
 	filename pasted2.png
-	scale 40
 
 \end_inset
 
@@ -1267,11 +1266,7 @@ We choose the start with the basic Q-Learning Monte Carlo algorithm.
 \begin_inset Formula $q$
 \end_inset
 
- function, calculate the optimal policy 
-\begin_inset Formula $\pi$
-\end_inset
-
- based on it
+ function, 
 \end_layout
 
 \begin_layout Standard
