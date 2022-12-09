@@ -103,7 +103,8 @@ Final Data Science Project (67814) - Analyzing Decision Making in Medical
 \end_layout
 
 \begin_layout Author
-Name Nameson, Name Namesberg
+Yuval Roditi, Ben Gofrit - Guided by Prof.
+ Michael Beil
 \end_layout
 
 \begin_layout Section
@@ -303,6 +304,18 @@ status open
 \begin_inset Graphics
 	filename 2018_policy_boxplots.png
 	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Estimated Policy Values box plots comparing the AI model with different...
+\end_layout
 
 \end_inset
 
@@ -1258,16 +1271,17 @@ Two important edge cases left to be considered were how to start and end
 \end_layout
 
 \begin_layout Subsubsection
-Algorithm
+Model Training Algorithm
 \end_layout
 
 \begin_layout Standard
-We choose to train our RNLmodel using Q-Learning Monte Carlo algorithm.
- The main idea of the algorithm is to iterativly estimate the 
-\begin_inset Formula $q$
+We choose to train our RNL model using Q-Learning Monte Carlo algorithm.
+ The main idea of the algorithm is to iterativly estimate the state-action
+ function 
+\begin_inset Formula $q_{\pi}\left(s,a\right)$
 \end_inset
 
- function, calculate the optimal policy 
+, calculate the optimal policy 
 \begin_inset Formula $\pi$
 \end_inset
 
@@ -1280,9 +1294,254 @@ and update the
 \end_inset
 
  function using the newly aquired data from the episode.
+ We also used the 
+\shape italic
+first-visit variation 
+\shape default
+of the algorithm, which is an optimization variant that skips re-evaluating
+ the same state-action pairs in the same episode (for effiency).
+ This variation is widely studied, and is referenced in page 128 in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RL Sutton Barto"
+literal "false"
+
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+The algorithm assumes (and takes as an input) an episode simulator which
+ is able to generate a series of states, action and following rewards :
+ 
+\begin_inset Formula $\left\{ \left(s_{t},a_{t},r_{t}\right)\right\} _{t=0}^{k}$
+\end_inset
+
+ (
+\begin_inset Formula $s_{k}$
+\end_inset
+
+ being the terminal state).
+ In our setting, the Episode simulator is implemented via the class 
+\shape italic
+Patient Simulator.
+ 
+\shape default
+Follows is a psedo-code of the training algorithm:
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Input
+\series default
+: Episode Simulator, N-Episodes (integer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\series bold
+Output:
+\series default
+ Optimal Policy 
+\begin_inset Formula $\pi^{\ast}$
+\end_inset
+
+, Estimated Value for each state 
+\begin_inset Formula $\hat{v}_{\pi^{\ast}}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Initialization: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Initialize 
+\begin_inset Formula $\pi_{0}$
+\end_inset
+
+ randomly.
+\end_layout
+
+\begin_layout Enumerate
+Initialize Q function that evaluates each pair as 0: 
+\begin_inset Formula 
+\[
+q=\left\{ \left(s,a\right)\rightarrow0\mid\left(s,a\right)\in\mathcal{S}\times\mathcal{A}\right\} 
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+Initialize empty hashtable for each pair in 
+\begin_inset Formula 
+\[
+\boldsymbol{returns}=\left\{ \left(s,a\right)\rightarrow\left[\ldots\right]\mid\left(s,a\right)\in\mathcal{S}\times\mathcal{A}\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Iteration:
+\series default
+ For each 
+\begin_inset Formula $i=1,...,N-Episodes$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Initialize an empty hashtable of seen_before_states 
+\begin_inset Formula $\left\{ \ldots\right\} .$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Generate a series 
+\begin_inset Formula $\left\{ \left(s_{t},a_{t},r_{t}\right)\right\} _{t=0}^{k}$
+\end_inset
+
+ via the Episode Simulator with policy 
+\begin_inset Formula $\pi_{i-1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Iterate over epsidoe trajectory - For 
+\begin_inset Formula $t=0,\ldots,k$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Check if the pair 
+\begin_inset Formula $\left(s_{t},a_{t}\right)$
+\end_inset
+
+
+\begin_inset Formula $\in$
+\end_inset
+
+seen_before_states.
+ If it has been seen move to next t.
+ Else add 
+\begin_inset Formula $\left(s_{t},a_{t}\right)$
+\end_inset
+
+ to seen_before_states .
+\end_layout
+
+\begin_layout Enumerate
+Add 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+ to the returns hashtable list that matches the pair 
+\begin_inset Formula $\left(s_{t},a_{t}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Update 
+\begin_inset Formula $q\left(s,a\right)$
+\end_inset
+
+ to be the average of returns list that matched the pair 
+\begin_inset Formula $\left(s_{t},a_{t}\right)$
+\end_inset
+
+ including return 
+\begin_inset Formula $r_{t}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Update the policy 
+\begin_inset Formula $\pi_{i}\left(s\right)=arg\max_{a\in\mathcal{A}}\left\{ q\left(s,a\right)\right\} .$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Termination
+\series default
+: Final policy is 
+\begin_inset Formula $\pi_{N-episodes}.$
+\end_inset
+
+ State-value function can be inferred using 
+\begin_inset Formula $q_{\pi_{N-episodes}}:$
+\end_inset
+
+ 
+\begin_inset Formula $v_{\pi_{N-episodes}}\left(s\right)=\max\left\{ q\left(s,a\right)\mid a\in\mathcal{A}\right\} $
+\end_inset
+
+ Return 
+\begin_inset Formula $\pi_{N-episodes},$
+\end_inset
+
+
+\begin_inset Formula $v_{\pi_{N-episodes}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+First Visit Q-Learning Monte Carlo 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
@@ -1295,8 +1554,78 @@ literal "false"
 
 \end_inset
 
+ and fitted it to our settings' needs.
+\end_layout
+
+\begin_layout Subsubsection
+Results From Training the Model
+\end_layout
+
+\begin_layout Standard
+After filtering the MIMIC data to clear desicions (see 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Decisions-Filter"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) we ran the Q-Learning Monte Carlo Algorithm for 1000 episodes, and ploted
+ the resulting policy 
+\begin_inset Formula $\&$
+\end_inset
+
+ value functions:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pasted4.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Estimated BP Value function after 
+\begin_inset Formula $1,000$
+\end_inset
+
+ iterations, with discount factor 
+\begin_inset Formula $\gamma=0.9$
+\end_inset
+
 .
- In each epsiode, an instance of the 
+ For reproduciton code see rnl_exploration.ipynb notebook
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The policy appears to be in complete disorder, almost 
 \end_layout
 
 \begin_layout Subsection
@@ -1531,7 +1860,14 @@ By applying all the filters we got 754 MB that we could load into the memory
 \end_layout
 
 \begin_layout Subsubsection
-Decisions Filter
+Decisions Filter 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Decisions-Filter"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
