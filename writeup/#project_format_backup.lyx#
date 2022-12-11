@@ -828,7 +828,6 @@ Permutations Test
 We started with a baseline permutation test (15,000 permutations), which
  provided the following results:
 \begin_inset Float figure
-placement H
 wide false
 sideways false
 status open
@@ -910,7 +909,6 @@ Following is a comparision of the PDF for each of BP bins, alongside their
 
 \begin_layout Standard
 \begin_inset Float figure
-placement H
 wide false
 sideways false
 status open
@@ -919,7 +917,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename pasted1.png
-	scale 55
+	scale 70
 
 \end_inset
 
@@ -1633,7 +1631,6 @@ noprefix "false"
 
 \begin_layout Standard
 \begin_inset Float figure
-placement H
 wide false
 sideways false
 status open
@@ -1704,7 +1701,6 @@ The results were significantly less entropied than those obtained from MIMIC:
 
 \begin_layout Standard
 \begin_inset Float figure
-placement H
 wide false
 sideways false
 status open
@@ -1876,62 +1872,7 @@ RNL
 Limitations
 \end_layout
 
-\begin_layout Enumerate
-
-\series bold
-Markovian Assumtpion
-\series default
-: the model assumed the Markovity of the decision process.
- Although simplifying, this isn't an unreasonable assumption: the half life
- of NOR is about a minute, so the decisions conclusions are instant.
- However, as discussed before, this only holds if the data reflects this
- time resolution.
-\end_layout
-
-\begin_layout Enumerate
-
-\series bold
-Patient filtering:
-\series default
- We filtered patients with comorbidities as well as patients with medcine
- overlaps (see 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Patients-Filters"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-), to prevent biases in decision-making (change of dose decision that was
- triggered by a different medicine in effect).
- In a practical setting this assumption will not hold.
- 
-\end_layout
-
-\begin_layout Enumerate
-
-\series bold
-Patient Simulation: 
-\series default
-As discussed, we trained the model 
-\shape italic
-in-silico
-\shape default
-.
- The patient simulation did not limit the trajectory to an actual patient,
- but used bins of all the patients in the data.
- Thus, the simulator was invariant to the fact that observations came from
- different patients, but only took their MAP bin into account.
- Thus the simulator could have also been biased by patients with a lot of
- measurements.
- 
-\end_layout
-
 \begin_layout Standard
-
-\shape italic
 A critical discussion on the work's limitations, simplifying assumptions,
  possible biases etc, and their possible effects on the results and the
  conclusions.
@@ -2009,14 +1950,7 @@ In order to work nimbly, we created a subset of the relevant data from all
 \end_layout
 
 \begin_layout Subsubsection
-Patients Filters 
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Patients-Filters"
-
-\end_inset
-
-
+Patients Filters
 \end_layout
 
 \begin_layout Enumerate

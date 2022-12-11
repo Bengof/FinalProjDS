@@ -128,38 +128,21 @@ Sepsis is a life threating condition that may arise as a response to an
  infection.
  When occured, it often requires ICU admission.
  Hence, it accounts for 30% of ICU admissions
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Bennett SR.
- Sepsis in the intensive care unit.
- Surgery (Oxf).
- 2015 Nov;33(11):565-571.
- doi: 10.1016/j.mpsur.2015.08.002.
- Epub 2015 Oct 9.
- PMID: 32287818; PMCID: PMC7143675.
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ICU_SEPS_STATS"
+literal "false"
 
 \end_inset
 
 .
  Sepsis will often be charactherized with a drop in blood pressure, which
  in turn will reduce the blood supplied to vital organs.
- It is a deadly condition, with an estimated mortality rate of 38%
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Martin CM, Priestap F, Fisher H, Fowler RA, Heyland DK, Keenan SP, Longo
- CJ, Morrison T, Bentley D, Antman N; STAR Registry Investigators.
- A prospective, observational registry of patients with severe sepsis: the
- Canadian Sepsis Treatment and Response Registry.
- Crit Care Med.
- 2009 Jan;37(1):81-8.
- doi: 10.1097/CCM.0b013e31819285f0.
- PMID: 19050636.
-\end_layout
+ It is a deadly condition, with an estimated mortality rate of 38% 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sepsis_Mortatlity"
+literal "false"
 
 \end_inset
 
@@ -170,7 +153,7 @@ Martin CM, Priestap F, Fisher H, Fowler RA, Heyland DK, Keenan SP, Longo
 \begin_layout Standard
 Norepinephrine
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 NE for short, may sometimes be refered to as noradrenaline (NA)
@@ -187,23 +170,15 @@ NE for short, may sometimes be refered to as noradrenaline (NA)
 \color red
 with a goal of Mean Arterial Pressure of 65 mm Hg
 \color inherit
-)
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Dugar S, Choudhary C, Duggal A.
- Sepsis and septic shock: Guideline-based management.
- Cleve Clin J Med.
- 2020 Jan;87(1):53-64.
- doi: 10.3949/ccjm.87a.18143.
- Epub 2020 Jan 2.
- PMID: 31990655.
-\end_layout
+) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gold_standard"
+literal "false"
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Standard
@@ -214,30 +189,28 @@ However, apart from this rule of thumb, there are no patient-level guidelines
 status open
 
 \begin_layout Plain Layout
-Mean Arterial Pressure, calculated 
+Mean Arterial Pressure is a measure of the average pressure in the arteries
+ during one cardiac cycle.
+ Calculated from the Systolic and Diastolic BP: MAP = 
+\begin_inset Formula $\unitfrac{(2\cdot\ diastolic\ BP)+systolic\ BP]}{3}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
 , there is no regards for the specific patient's MAP trajectory.
  Thus, it shoud come as no surprise that there is a high variablity in Sepsis
- treatment patterns
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Bray A, Kampouraki E, Winter A, Jesuthasan A, Messer B, Graziadio S.
- High Variability in Sepsis Guidelines in UK: Why Does It Matter? Int J
- Environ Res Public Health.
- 2020 Mar 19;17(6):2026.
- doi: 10.3390/ijerph17062026.
- PMID: 32204395; PMCID: PMC7142432.
-\end_layout
+ treatment patterns 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sepsis_Treatment_Variability"
+literal "false"
 
 \end_inset
 
-.
- 
+
 \end_layout
 
 \begin_layout Standard
@@ -252,6 +225,14 @@ The Artificial Intelligence Clinician learns optimal treatment strategies
 \series bold
 Komorowski et al
 \series default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Nature_Komorowski"
+literal "false"
+
+\end_inset
+
 ).
  In this work, a Reinforcment Learning
 \begin_inset CommandInset ref
@@ -339,19 +320,12 @@ than both the AI and the human clincian's policy.
 \begin_layout Standard
 This issue, as well as a recreation of the results and comparing the AI's
  suggestions to clincian's descisions for indvidual patient's trajectories
- are discussed in great lengths in the 2019 review by Jeter, R., Josef, C.,
- Shashikumar, S., & Nemati, S.
- (2019)
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Jeter, R., Josef, C., Shashikumar, S., & Nemati, S.
- (2019).
- Does the" Artificial Intelligence Clinician" learn optimal treatment strategies
- for sepsis in intensive care?.
- arXiv preprint arXiv:1902.03271.
-\end_layout
+ are discussed in great lengths in the 2019 review by Jeter, Josef, Shashikumar,
+ & Nemati 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "clinician_review"
+literal "false"
 
 \end_inset
 
@@ -374,24 +348,10 @@ The abovementioned works were trained on MIMIC-III (Medical Information
  Mart for Intensive Care) - a publicly available database of patients admitted
  to the Beth Israel Deaconess Medical Center (BIDMC) in Boston, USA, published
  in 2016
-\end_layout
-
-\begin_layout Standard
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Johnson, A.
- E.
- W., Pollard, T.
- J., Shen, L., Lehman, L.
- H., Feng, M., Ghassemi, M., Moody, B., Szolovits, P., Celi, L.
- A., & Mark, R.
- G.
- (2016).
- MIMIC-III, a freely accessible critical care database.
- Scientific Data, 3, 160035.
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MIMIC-III"
+literal "false"
 
 \end_inset
 
@@ -399,22 +359,31 @@ Johnson, A.
  In March 2021 a new version of MIMC was released - MIMIC-IV.
  It contains deidentified data of 383,220 patients admitted to an intensive
  care unit, publicly available - 50,048 
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Johnson, A., Bulgarelli, L., Pollard, T., Horng, S., Celi, L.
- A., & Mark, R.
- (2022).
- MIMIC-IV (version 2.1).
- PhysioNet.
- https://doi.org/10.13026/rrgf-xw32.
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MIMIC-IV"
+literal "false"
 
 \end_inset
 
 .
  
+\end_layout
+
+\begin_layout Standard
+In addition, we used the eICU Collaborative Research Database.
+ It is a large, comprehensive dataset of critical care data collected from
+ over 200 ICUs at multiple hospitals across the United States.
+ The database covers patients who were admitted to critical care units in
+ 2014 and 2015, and was made publicly available at 2018 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "eICU"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -438,12 +407,10 @@ Treatmeant Variability Assessment between ICU units
 \begin_layout Standard
 As mentioned, evidence regarding the variability in treatment patterns has
  been published, like the work preformed by Bray et al (2020)
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-refer to prev ref
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sepsis_Treatment_Variability"
+literal "false"
 
 \end_inset
 
@@ -524,8 +491,45 @@ For simplicity, our model used only single most important feature for MAP
 Mathematical Background
 \end_layout
 
+\begin_layout Subsubsection
+Permutations Test
+\end_layout
+
 \begin_layout Standard
-Some general background to the problem.
+A Statistical test useds to determine whether two observations were drawn
+ from the same distribution.
+ It is a non-parametric approach - does not require knowing the distribution
+ of the data.
+ The test is preformed by randomly taking two groups of the distribution
+ and computing the test statistic (e.g difference of means) with shuffeled
+ labels.
+ The p-value is calculated as the fraction of randomly labeled iterations
+ that had a more extreme test statistic value than that of the original
+ dataset.
+\end_layout
+
+\begin_layout Subsubsection
+Kolmogorov Smoirnov Test
+\end_layout
+
+\begin_layout Standard
+Additional Non-parametric test to determine whether two samples come from
+ the same underlying distribution.
+ the KST works by calculating CDFs for the two samples and comparing the
+ maximal difference between them.
+ The maximal difference is known as the KS statistic:
+\begin_inset Formula $D_{KS}=\sup_{x}\left|F\left(x\right)-G\left(x\right)\right|$
+\end_inset
+
+, which can be used to generate p-values for the hypothesis 
+\begin_inset Formula $H_{0}:F=G$
+\end_inset
+
+ against 
+\begin_inset Formula $H_{1}:F\neq G$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -537,197 +541,6 @@ name "subsec:Reinforcement-Learning"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-RNL is ...
-\end_layout
-
-\begin_layout Subsubsection
-Permutations Test
-\end_layout
-
-\begin_layout Subsubsection
-KST
-\end_layout
-
-\begin_layout Section
-Results
-\end_layout
-
-\begin_layout Subsection
-SICU - MICU Comparision 
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:SICU---MICU"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We divided the inputs data to groups according to their last blood pressure
- measurement before receiving the Norepinephrine:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-BP\ RANGES=\left[\underset{b_{0}}{\underbrace{(0,49)}},(50,59),\ldots,(80,89),\underset{b_{7}}{\underbrace{(90,200)}}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-After doing so, we want to check for each group the hypothesis that the
- treatment will be the same across different units, against the conjecture
- that treatment varies.
- Let 
-\begin_inset Formula $\mu_{M,b_{j}}$
-\end_inset
-
- denote the expected value of NOR dose in the Medical ICU unit for the group
- with bp in the range denoted as 
-\begin_inset Formula $b_{j}$
-\end_inset
-
-, and likewise for 
-\begin_inset Formula $\mu_{S,b_{j}}$
-\end_inset
-
-(for Surgical ICU).
- 
-\end_layout
-
-\begin_layout Standard
-We start by checking each of the 
-\begin_inset Formula $8$
-\end_inset
-
- hypothesis separately: for each 
-\begin_inset Formula $j=0,\ldots,7$
-\end_inset
-
- we test:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-H_{0} & :\mu_{M,b_{j}}=\mu_{S,b_{j}}\\
-H_{1} & :\mu_{M,b_{j}}\neq\mu_{S,b_{j}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Permutations Test
-\end_layout
-
-\begin_layout Standard
-We started with a baseline permutation test (15,000 permutations), which
- provided the following results:
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-\begin{tabular}{lllllllll}
-   &  0  &  1  &  2  &  3  &  4  &  5  &  6  &  7 \\
-bp\_range  &  (0, 49)  &  (50, 59)  &  (60, 64)  &  (65, 69)  &  (70, 74)  &  (75, 79)  &  (80, 89)  &  (90, 200) \\
- p\_val  &  0.825667  &  0.0012  &  0.138  &  0.012733  &  0.0116  &  0.010533  &  0.003933  &  0.0002 \\
- is pval < 0.05  &  False  & \boldsymbol{True} &  False  & \boldsymbol{True} & \boldsymbol{True} & \boldsymbol{True} & \boldsymbol{True} & \boldsymbol{True}
-\end{tabular}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-P-Values for each bin testing 
-\begin_inset Formula $H_{0}:\mu_{M,b_{j}}=\mu_{S,b_{j}}$
-\end_inset
-
-against 
-\begin_inset Formula $H_{1}:\mu_{M,b_{j}}\neq\mu_{S,b_{j}}$
-\end_inset
-
- using 15,000 permutations.
- See Notebook 
-\begin_inset Quotes eld
-\end_inset
-
-permutation_test.ipynb
-\begin_inset Quotes erd
-\end_inset
-
- for reproduction 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-It is evident that in almost all groups there has been a significant difference
- between the expected NOR dose between the units for patients with the same
- MAP values.
- This is true for all bp ranges apart from two: 
-\begin_inset Formula $(0,49)$
-\end_inset
-
- which doesn't have enough samples for statistically significant p-value,
- and 
-\begin_inset Formula $(60,64)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Permutations test does not assume any prior assumptions on the data, and
- therefore produces p-values which are very conservative.
- We also looked into fitting a distribution to the data and conducting statistic
-al tests using a non-parameteric approach.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename pasted1.png
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Reinforcement Learning
-\end_layout
-
-\begin_layout Subsubsection
-Mathematical Background
 \end_layout
 
 \begin_layout Standard
@@ -929,6 +742,243 @@ q_{\pi}\left(s,a\right)=E_{\pi}\left(\sum_{k=0}^{\infty}\gamma^{k}R_{t+k+1}\mid 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Subsection
+SICU - MICU Comparision 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:SICU---MICU"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We divided the inputs data to groups according to their last blood pressure
+ measurement before receiving the Norepinephrine:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+BP\ RANGES=\left[\underset{b_{0}}{\underbrace{(0,49)}},(50,59),\ldots,(80,89),\underset{b_{7}}{\underbrace{(90,200)}}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After doing so, we want to check for each group the hypothesis that the
+ treatment will be the same across different units, against the conjecture
+ that treatment varies.
+ Let 
+\begin_inset Formula $\mu_{M,b_{j}}$
+\end_inset
+
+ denote the expected value of NOR dose in the Medical ICU unit for the group
+ with bp in the range denoted as 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+, and likewise for 
+\begin_inset Formula $\mu_{S,b_{j}}$
+\end_inset
+
+(for Surgical ICU).
+ 
+\end_layout
+
+\begin_layout Standard
+We start by checking each of the 
+\begin_inset Formula $8$
+\end_inset
+
+ hypothesis separately: for each 
+\begin_inset Formula $j=0,\ldots,7$
+\end_inset
+
+ we test:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+H_{0} & :\mu_{M,b_{j}}=\mu_{S,b_{j}}\\
+H_{1} & :\mu_{M,b_{j}}\neq\mu_{S,b_{j}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Permutations Test
+\end_layout
+
+\begin_layout Standard
+We started with a baseline permutation test (15,000 permutations), which
+ provided the following results:
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\begin{tabular}{lllllllll}
+  &  0  &  1  &  2  &  3  &  4  &  5  &  6  &  7 \\
+ bp\_range  &  (0, 49)  &  (50, 59)  &  (60, 64)  &  (65, 69)  &  (70, 74)  &  (75, 79)  &  (80, 89)  &  (90, 200) \\
+ p\_val  &  0.825667  &  0.0012  &  0.138  &  0.012733  &  0.0116  &  0.010533  &  0.003933  &  0.0002 \\
+ is pval < 0.05  &  False  &  \boldsymbol{True}  &  False  &  \boldsymbol{True}  &  \boldsymbol{True}  &  \boldsymbol{True}  &  \boldsymbol{True}  &  \boldsymbol{True} 
+\end{tabular}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+P-Values for each bin testing 
+\begin_inset Formula $H_{0}:\mu_{M,b_{j}}=\mu_{S,b_{j}}$
+\end_inset
+
+against 
+\begin_inset Formula $H_{1}:\mu_{M,b_{j}}\neq\mu_{S,b_{j}}$
+\end_inset
+
+ using 15,000 permutations.
+ See Notebook 
+\begin_inset Quotes eld
+\end_inset
+
+permutation_test.ipynb
+\begin_inset Quotes erd
+\end_inset
+
+ for reproduction 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is evident that in almost all groups there has been a significant difference
+ between the expected NOR dose between the units for patients with the same
+ MAP values.
+ This is true for all bp ranges apart from two: 
+\begin_inset Formula $(0,49)$
+\end_inset
+
+ which doesn't have enough samples for statistically significant p-value,
+ and 
+\begin_inset Formula $(60,64)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+KST comparision
+\end_layout
+
+\begin_layout Standard
+Following is a comparision of the PDF for each of BP bins, alongside their
+ KST p-values.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pasted1.png
+	scale 55
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+PDF of the original NOR rate in each BP group, with division to MICU and
+ SICU, alongside KST p-val and the amount of samples in each group.
+ For reproudction - run gamma_distribution_test.ipynb notebook
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+*Similarly to the p-values generated using the permutation test, in most
+ groups 
+\begin_inset Formula $p-val<0.05,$
+\end_inset
+
+ evident that there is a significant difference in the means of the NOR
+ dosage given to patients with similar BP between the different units.
+\end_layout
+
+\begin_layout Standard
+Additional resolution achieved in this method is the shape of the distributions
+ we see that the peak of the distribution of MICU tends to be lower than
+ SICU, which indicates a higher range of dose values given by the doctors
+ in MICU (In SICU doctors tend to give dosage which is close to 0.05 across
+ all groups).
+\end_layout
+
+\begin_layout Standard
+Two groups that did not have a significant difference are the first group
+ (0-49) which doesn't contain enough samples for statistical significance,
+ and two groups near the target area of 65 - 
+\begin_inset Formula $\left(60-64\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(75-79\right).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Reinforcement Learning
 \end_layout
 
 \begin_layout Subsubsection
@@ -1378,7 +1428,7 @@ Initialize
 \end_layout
 
 \begin_layout Enumerate
-Initialize Q function that evaluates each pair as 0: 
+Initialize Q function that evaluates each pair's q value to be 0: 
 \begin_inset Formula 
 \[
 q=\left\{ \left(s,a\right)\rightarrow0\mid\left(s,a\right)\in\mathcal{S}\times\mathcal{A}\right\} 
@@ -1390,7 +1440,8 @@ q=\left\{ \left(s,a\right)\rightarrow0\mid\left(s,a\right)\in\mathcal{S}\times\m
 \end_layout
 
 \begin_layout Enumerate
-Initialize empty hashtable for each pair in 
+Initialize empty returns hashtable, that maps each pair to a list of returns
+ produced from this pair.
 \begin_inset Formula 
 \[
 \boldsymbol{returns}=\left\{ \left(s,a\right)\rightarrow\left[\ldots\right]\mid\left(s,a\right)\in\mathcal{S}\times\mathcal{A}\right\} 
@@ -1424,7 +1475,7 @@ Initialize an empty hashtable of seen_before_states
 \end_layout
 
 \begin_layout Enumerate
-Generate a series 
+Generate a series of states, actions and rewards 
 \begin_inset Formula $\left\{ \left(s_{t},a_{t},r_{t}\right)\right\} _{t=0}^{k}$
 \end_inset
 
@@ -1436,7 +1487,7 @@ Generate a series
 \end_layout
 
 \begin_layout Enumerate
-Iterate over epsidoe trajectory - For 
+Iterate over the epsiode's trajectory - For 
 \begin_inset Formula $t=0,\ldots,k$
 \end_inset
 
@@ -1582,6 +1633,7 @@ noprefix "false"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -1625,15 +1677,81 @@ Estimated BP Value function after
 \end_layout
 
 \begin_layout Standard
-The policy appears to be in complete disorder, almost 
+The policy appears to be in complete disorder, similar to Gaussian noise.
+ The Estimated category value has more order to it, reflecting the reward
+ function: in the higher bins the estimated value is 0, since no entries
+ in the dataset were available for those bins.
+ lowset estimated bin value is around 80-90, reflecting areas were the probabili
+ty to go back to the target value of 65 is the lowest.
+ 
 \end_layout
 
 \begin_layout Subsection
-EICU
+eICU RNL
 \end_layout
 
 \begin_layout Standard
-Also containing relevant visuals.
+The eICU offers a higher time resolution of BP measurements.
+ While patients in MIMIC have an average of one measurement per hour, in
+ the eICU time resolution is every five minutes.
+ This encouraged us to process the eICU data to fit our RNL framework as
+ well, and train our model using this data.
+\end_layout
+
+\begin_layout Standard
+The results were significantly less entropied than those obtained from MIMIC:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pasted5.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename pasted6.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Estimated BP Value function after 
+\begin_inset Formula $1,000$
+\end_inset
+
+ iterations, with discount factor 
+\begin_inset Formula $\gamma=0.9$
+\end_inset
+
+.
+ For reproduciton code see rnl_exploration.ipynb notebook
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1647,20 +1765,96 @@ MICU - SICU Comparision
 \begin_layout Standard
 As expected, we witnessed major differences between the doses given to patients
  with similar BP.
- However, 
+ In both the KST and Permutations test, most groups had significant differences,
+ apart from the bin which didn't have enough samples - 
+\begin_inset Formula $\left(0,49\right)$
+\end_inset
+
+, and bins near the target value.
+ This finding supporting previous research on Sepsis treatment variability,
+ showing that there is no uniform policy for treatment, even within the
+ same hospital.
+ Examing the CDF of NOR doses for each BP group provided additional insights
+ to the differences between SICU and MICU, and showed that there is higher
+ treatment variability in the MICU on patients with the similar MAP.
+ 
+\end_layout
+
+\begin_layout Standard
+It is important to note that the tests split the patients solely on their
+ MAP values, and did not split to internal cohorts within each bin.
+ It is only natural that patients in SICU and MICU will have different symptoms
+ and Physiology, and therfore may require different treatment.
+ A finer test of treatment variability could have been comparing the decisions
+ different doctors made within the same unit, and perfably in treating the
+ same patient.
+ This could not have been done using MIMIC, as it doesn't hold any data
+ on the doctor who made the desicion.
+ 
+\end_layout
+
+\begin_layout Standard
+The high variability in Sepsis treatment, even within the same hospital,
+ indicates potential for the effectiveness of an AI-based model.
+ Such model will not be limited to the treating expirence a single human
+ clinican can obtain in a lifetime, and could make desicion based on huge
+ train datasets.
+ 
 \end_layout
 
 \begin_layout Subsection
 RNL
 \end_layout
 
-\begin_layout Itemize
-Markovian assumption - very strong, not nessacirly true, espically in a
- low resolution situation.
+\begin_layout Standard
+We've estabilshed a simple, short-term RNL model, looking to stabilize a
+ patient near the target MAP value of 65.
+ Training the model on MIMIC data provided poor results, which were highly
+ entropied and did not pass the reasonability test.
+ The model makes the Markovian assumption, which likely does not hold in
+ low time resolution data like MIMIC (BP mesaurement every hour).
+ However, training the model on the eICU data, which had a higher time resolutio
+n (~mesaurement every 5 min on average) showed much more plausible and less
+ entropied results.
  
 \end_layout
 
 \begin_layout Standard
+The initial target of our study was to preform behaivoral analysis - check
+ what is the target MAP that doctors in different units aim to.
+ In this study we found that 
+\series bold
+in order to learn
+\series default
+ 
+\series bold
+behaviors, we need a close temporal resolution 
+\series default
+- between the MAP value observed and the desicion (NOR dose) that followed.
+ As proof of this, we showed that learning from a higher resolution data
+ gives more plausible policies.
+ 
+\end_layout
+
+\begin_layout Standard
+Focusing on a short term model holds potential for clincal applications.
+ It uses the key factor crucial for maintaining the patient alive in the
+ state of Septic shock - the MAP, and could be relevant to situations where
+ only the short goal of stabilizing the patient is important.
+ Simple models are also easier to train, as the state space 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+ is smaller (
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+ grows exponentially with each variable added).
+\end_layout
+
+\begin_layout Standard
+
+\shape italic
 About 2 written pages, discussing the results and their implications.
 \end_layout
 
@@ -1672,11 +1866,72 @@ A Brief Summary of the Results in Retrospective
 Conclusions Based on the Results
 \end_layout
 
+\begin_layout Enumerate
+
+\series bold
+RNL
+\end_layout
+
 \begin_layout Subsection
 Limitations
 \end_layout
 
+\begin_layout Enumerate
+
+\series bold
+Markovian Assumtpion
+\series default
+: the model assumed the Markovity of the decision process.
+ Although simplifying, this isn't an unreasonable assumption: the half life
+ of NOR is about a minute, so the decisions conclusions are instant.
+ However, as discussed before, this only holds if the data reflects this
+ time resolution.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Patient filtering:
+\series default
+ We filtered patients with comorbidities as well as patients with medcine
+ overlaps (see 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Patients-Filters"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), to prevent biases in decision-making (change of dose decision that was
+ triggered by a different medicine in effect).
+ In a practical setting this assumption will not hold.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Patient Simulation: 
+\series default
+As discussed, we trained the model 
+\shape italic
+in-silico
+\shape default
+.
+ The patient simulation did not limit the trajectory to an actual patient,
+ but used bins of all the patients in the data.
+ Thus, the simulator was invariant to the fact that observations came from
+ different patients, but only took their MAP bin into account.
+ Thus the simulator could have also been biased by patients with a lot of
+ measurements.
+ 
+\end_layout
+
 \begin_layout Standard
+
+\shape italic
 A critical discussion on the work's limitations, simplifying assumptions,
  possible biases etc, and their possible effects on the results and the
  conclusions.
@@ -1684,6 +1939,59 @@ A critical discussion on the work's limitations, simplifying assumptions,
 
 \begin_layout Subsection
 Future Work
+\end_layout
+
+\begin_layout Standard
+The resulted model are far from being clinicaly relevant and applicable.
+ A crucial first step will be to compare the model's suggestions on actual
+ patients to the decisions made by the doctor, and check if they are within
+ a reasonable range.
+ Look into the areas of disagreement between the clinician and the AI, and
+ use the hindsight test to verify who was right (e.g - AI suggested higher
+ dose, the patient's BP did not rise, doctor had to adjust and vice-versa).
+ 
+\end_layout
+
+\begin_layout Standard
+In addition, several important adjustments are required: 
+\end_layout
+
+\begin_layout Enumerate
+Add the fluids the patient recieves as an additional variable.
+\end_layout
+
+\begin_layout Enumerate
+Take comorbidities into account (other medicines that are taken simultaneously).
+\end_layout
+
+\begin_layout Enumerate
+Consider taking several MAP entries back, not just most recent.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Adjust the RNL hyperparameters: Number of Episodes, 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ (discount factor), 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ (percentage of explorative decisions in the training phases).
+\end_layout
+
+\begin_layout Enumerate
+Consider soft borders between bins.
+\end_layout
+
+\begin_layout Enumerate
+Consider another reward function.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Consider termination conditions
 \end_layout
 
 \begin_layout Standard
@@ -1702,11 +2010,18 @@ Preprocessing
 \begin_layout Standard
 In order to work nimbly, we created a subset of the relevant data from all
  the possible data that MIMIC-IV offers.
- The subset was creaded by applying the following folters:
+ The subset was creaded by applying the following filters:
 \end_layout
 
 \begin_layout Subsubsection
-Patients Filters
+Patients Filters 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Patients-Filters"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
@@ -1982,6 +2297,159 @@ Name Namesberg: Some work done only by them.
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
+key "ICU_SEPS_STATS"
+literal "false"
+
+\end_inset
+
+Bennett SR.
+ Sepsis in the intensive care unit.
+ Surgery (Oxf).
+ 2015 Nov;33(11):565-571.
+ doi: 10.1016/j.mpsur.2015.08.002.
+ Epub 2015 Oct 9.
+ PMID: 32287818; PMCID: PMC7143675.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Sepsis_Mortatlity"
+literal "false"
+
+\end_inset
+
+Martin CM, Priestap F, Fisher H, Fowler RA, Heyland DK, Keenan SP, Longo
+ CJ, Morrison T, Bentley D, Antman N; STAR Registry Investigators.
+ A prospective, observational registry of patients with severe sepsis: the
+ Canadian Sepsis Treatment and Response Registry.
+ Crit Care Med.
+ 2009 Jan;37(1):81-8.
+ doi: 10.1097/CCM.0b013e31819285f0.
+ PMID: 19050636.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Gold_standard"
+literal "false"
+
+\end_inset
+
+Dugar S, Choudhary C, Duggal A.
+ Sepsis and septic shock: Guideline-based management.
+ Cleve Clin J Med.
+ 2020 Jan;87(1):53-64.
+ doi: 10.3949/ccjm.87a.18143.
+ Epub 2020 Jan 2.
+ PMID: 31990655.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Sepsis_Treatment_Variability"
+literal "false"
+
+\end_inset
+
+Bray A, Kampouraki E, Winter A, Jesuthasan A, Messer B, Graziadio S.
+ High Variability in Sepsis Guidelines in UK: Why Does It Matter? Int J
+ Environ Res Public Health.
+ 2020 Mar 19;17(6):2026.
+ doi: 10.3390/ijerph17062026.
+ PMID: 32204395; PMCID: PMC7142432.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Nature_Komorowski"
+literal "false"
+
+\end_inset
+
+Komorowski M, Celi LA, Badawi O, Gordon AC, Faisal AA.
+ The Artificial Intelligence Clinician learns optimal treatment strategies
+ for sepsis in intensive care.
+ Nat Med.
+ 2018 Nov;24(11):1716-1720.
+ doi: 10.1038/s41591-018-0213-5.
+ Epub 2018 Oct 22.
+ PMID: 30349085.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "clinician_review"
+literal "false"
+
+\end_inset
+
+Jeter, R., Josef, C., Shashikumar, S., & Nemati, S.
+ (2019).
+ Does the" Artificial Intelligence Clinician" learn optimal treatment strategies
+ for sepsis in intensive care?.
+ arXiv preprint arXiv:1902.03271.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "MIMIC-III"
+literal "false"
+
+\end_inset
+
+Johnson, A.
+ E.
+ W., Pollard, T.
+ J., Shen, L., Lehman, L.
+ H., Feng, M., Ghassemi, M., Moody, B., Szolovits, P., Celi, L.
+ A., & Mark, R.
+ G.
+ (2016).
+ MIMIC-III, a freely accessible critical care database.
+ Scientific Data, 3, 160035.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "MIMIC-IV"
+literal "false"
+
+\end_inset
+
+Johnson, A., Bulgarelli, L., Pollard, T., Horng, S., Celi, L.
+ A., & Mark, R.
+ (2022).
+ MIMIC-IV (version 2.1).
+ PhysioNet.
+ https://doi.org/10.13026/rrgf-xw32.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "eICU"
+literal "false"
+
+\end_inset
+
+The eICU Collaborative Research Database, a freely available multi-center
+ database for critical care research.
+ Pollard TJ, Johnson AEW, Raffa JD, Celi LA, Mark RG and Badawi O.
+ Scientific Data (2018).
+ DOI: http://dx.doi.org/10.1038/sdata.2018.178.
+ Available from: https://www.nature.com/articles/sdata201817
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
 key "mimic-doc"
 literal "false"
 
@@ -2062,143 +2530,6 @@ literal "false"
 
 Carnegie Malon University, Cosma Shalizi, Statistics 36-462, Spring 2009,
  Lecture 6 https://www.stat.cmu.edu/~cshalizi/462/lectures/06/markov-mle.pdf
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-8"
-literal "false"
-
-\end_inset
-
-Settles, B.
- (2009).
- Active Learning Literature Survey (Computer Sciences Technical Report No.
- 1648).
- University of Wisconsin–Madison.
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-2"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-9"
-literal "false"
-
-\end_inset
-
-Donggeun Yoo and In So Kweon.
- Learning loss for active learning.
- In CVPR, pages 93–102, 2019.
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-10"
-literal "false"
-
-\end_inset
-
-Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas Usunier, Alexander
- Kirillov, and Sergey Zagoruyko.
- End-to-end object detection with transformers.
- In ECCV, 2020
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-11"
-literal "false"
-
-\end_inset
-
-Mark Everingham, Luc Van Gool, Christopher KI Williams, John Winn, and Andrew
- Zisserman.
- The pascal visual object classes (voc) challenge.
- International journal of computer vision, 88(2):303–338, 2010
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-3"
-literal "false"
-
-\end_inset
-
-Andreas Geiger, Philip Lenz, and Raquel Urtasun.
- Are we ready for autonomous driving? the kitti vision benchmark suite.
- In Conference on Computer Vision and Pattern Recognition (CVPR), 2012.
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-12"
-literal "false"
-
-\end_inset
-
-Xin Wang, Yudong Chen, and Wenwu Zhu.
- 2021.
- A survey on curriculum learning.
- IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-4"
-literal "false"
-
-\end_inset
-
-yukkyo (2021).
- voc2coco.
- GitHub.
- Note: https://github.com/yukkyo/voc2coco.
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-5"
-literal "false"
-
-\end_inset
-
-Moore, B., & Corso, J.
- (2020).
- FiftyOne.
- GitHub.
- Note: https://github.com/voxel51/fiftyone.
-\end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-6"
-literal "false"
-
-\end_inset
-
-McInnes, L., Healy, J., & Melville, J.
- (2018).
- UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction.
- ArXiv e-prints.
- 
 \end_layout
 
 \end_body
