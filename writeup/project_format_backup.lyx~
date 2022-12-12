@@ -2633,7 +2633,8 @@ Short gap between two doses that the first was stopped or paused
  - there are specific status descriptions in the input event files that
  implies that the dose was paused or stopped by the caretaker.
  Sometimes, there is a record of a successive dose that comes immediately
- after and with same or very close dose rate (for example 0.2 and 1.9999).
+ after (W previous one, and with same or very close dose rate (for example
+ 0.2 and 1.9999).
  In this case we defined the successive dose as non-decision dose.
 \end_layout
 
