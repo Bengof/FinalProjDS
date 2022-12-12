@@ -58,6 +58,7 @@ def _read_bp_rnl(chartevents_path):
 
 def doses_per_stay_id(stay_id, bps, doses):
     bps_stay_id_subset = bps[bps.stay_id == stay_id]
+    bps_stay_id_subset = bps_stay_id_subset[~bps_stay_id_subset["cur_bp"].isna()]
     doses_stay_id_subset = doses[doses.stay_id == stay_id]
     if not(bps_stay_id_subset.empty):
         bps_stay_id_subset = bps_stay_id_subset.sort_values(by="cur_bp_time")
@@ -112,19 +113,19 @@ def generate_rnl_states_and_actions(bps, doses):
             bps_and_dose = bps_and_dose_per_stay
 
     bps_and_dose["originalrate"] = bps_and_dose["originalrate"].fillna(0)
-    bps_and_dose = bps_and_dose[~bps_and_dose["cur_bp"].isna()]
-    bps_and_dose = add_first_and_last_indicators(bps_and_dose)
     bps_and_dose["cur_bp"] = bps_and_dose["cur_bp"].astype(int)
     # The only case with next_bp == nan is when there is no next bp in the last row.
     # we dont use the last bp, therefore put 0 is reasonable
     bps_and_dose["next_bp"] = bps_and_dose["next_bp"].fillna(0)
     bps_and_dose["next_bp"] = bps_and_dose["next_bp"].astype(int)
     bps_and_dose = add_bp_catgeories(bps_and_dose)
+    bps_and_dose = add_first_and_last_indicators(bps_and_dose)
     return bps_and_dose
 
 
 if '__main__' == __name__:
     inputevents_states_ok, inputevents_states_full = run_pipeline(create_filtered_files_flag=True)
     inputevents_states_ok.to_csv("../processed/inputevents_decision_only.csv")
-    bp_rnl = generate_rnl_bp_events("../filtered/filtered_chartevents.csv", "processed\\full_pipeline_ok_filtered.csv")
-    bp_rnl.to_csv("../processed/RNLData/bps_with_doses_fixed.csv")
+    bps = pd.read_csv("../filtered/filtered_chartevents.csv")
+    bp_rnl = generate_rnl_bp_events(bps, inputevents_states_ok)
+    bp_rnl.to_csv("../processed/RNLData/MIMIC_bps_with_doses.csv")

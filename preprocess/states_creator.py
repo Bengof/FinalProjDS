@@ -4,8 +4,6 @@ import numpy as np
 import consts
 from preceding_events import get_prev_dose
 
-
-
 NOR_OVERLAP_STATUS_DESC_TO_STATE = {
     "FinishedRunning": consts.State.OVERLAPPED_WITH_ANOTHER_NE_FINISHED,
     "Paused": consts.State.OVERLAPPED_WITH_ANOTHER_NE_PAUSED,
@@ -31,34 +29,45 @@ def mark_ne_events_that_overlap(df):
     """
     df = df.rename(columns={"Unnamed: 0": "input_index"})
     for stay_id in tqdm(df["stay_id"].unique()):
-        patient_noreadrenaline = df[(df["stay_id"] == stay_id) & (df["itemid_label"] == "Norepinephrine")][["input_index", "starttime", "endtime", "statusdescription", "originalrate", "itemid_label", "State"]].sort_values(by="starttime")
-        patient_full_inputs = df[(df["stay_id"] == stay_id) ][["input_index", "starttime", "endtime", "statusdescription", "originalrate", "itemid_label", "State"]].sort_values(by="starttime")
+        patient_noreadrenaline = df[(df["stay_id"] == stay_id) & (df["itemid_label"] == "Norepinephrine")][
+            ["input_index", "starttime", "endtime", "statusdescription", "originalrate", "itemid_label",
+             "State"]].sort_values(by="starttime")
+        patient_full_inputs = df[(df["stay_id"] == stay_id)][
+            ["input_index", "starttime", "endtime", "statusdescription", "originalrate", "itemid_label",
+             "State"]].sort_values(by="starttime")
         for noreadrenaline_event in patient_noreadrenaline.itertuples():
             for med_event in patient_full_inputs.itertuples():
-                if med_event.starttime <= noreadrenaline_event.starttime and med_event.endtime > noreadrenaline_event.starttime\
-                    and med_event.input_index != noreadrenaline_event.input_index:
+                if med_event.starttime <= noreadrenaline_event.starttime and med_event.endtime > noreadrenaline_event.starttime \
+                        and med_event.input_index != noreadrenaline_event.input_index:
                     if med_event.itemid_label == "Norepinephrine":
-                        df.loc[df["input_index"] == noreadrenaline_event.input_index, "State"] = NOR_OVERLAP_STATUS_DESC_TO_STATE[med_event.statusdescription]
+                        df.loc[df["input_index"] == noreadrenaline_event.input_index, "State"] = \
+                        NOR_OVERLAP_STATUS_DESC_TO_STATE[med_event.statusdescription]
                     else:
-                        df.loc[df["input_index"] == noreadrenaline_event.input_index, "State"] = consts.State.OVERLAPPED_WITH_DIFFERENT_MED
+                        df.loc[df[
+                                   "input_index"] == noreadrenaline_event.input_index, "State"] = consts.State.OVERLAPPED_WITH_DIFFERENT_MED
     return df
 
 
 def mark_epsilon(df_inputs, epsilon):
     for stay_id in tqdm(df_inputs["stay_id"].unique()):
-        input_for_patient = df_inputs[(df_inputs["stay_id"] == stay_id) & (df_inputs["itemid_label"] == "Norepinephrine")][["stay_id", "starttime", "endtime", "statusdescription", "originalrate", "input_index", "itemid_label", "State"]].sort_values(by="starttime")
+        input_for_patient = \
+        df_inputs[(df_inputs["stay_id"] == stay_id) & (df_inputs["itemid_label"] == "Norepinephrine")][
+            ["stay_id", "starttime", "endtime", "statusdescription", "originalrate", "input_index", "itemid_label",
+             "State"]].sort_values(by="starttime")
         if len(input_for_patient) == 0:
             continue
         previous_rate = input_for_patient.iloc[0]["originalrate"]
         previous_endtime = input_for_patient.iloc[0]["endtime"]
         previous_status = input_for_patient.iloc[0]["statusdescription"]
         for row in input_for_patient[1:].itertuples():
-                if abs(row.originalrate - previous_rate) < epsilon and previous_endtime == row.starttime:
-                        df_inputs.loc[df_inputs["input_index"] == row.input_index, "State"] = NOR_EPS_STATUS_DESC_TO_STATE[previous_status]
-                previous_rate = row.originalrate
-                previous_endtime = row.endtime
-                previous_status = row.statusdescription
+            if abs(row.originalrate - previous_rate) < epsilon and previous_endtime == row.starttime:
+                df_inputs.loc[df_inputs["input_index"] == row.input_index, "State"] = NOR_EPS_STATUS_DESC_TO_STATE[
+                    previous_status]
+            previous_rate = row.originalrate
+            previous_endtime = row.endtime
+            previous_status = row.statusdescription
     return df_inputs
+
 
 def mark_events_by_gap(inputs_df, statusdescription, gap_length):
     """
@@ -69,18 +78,20 @@ def mark_events_by_gap(inputs_df, statusdescription, gap_length):
     """
     inputs_df = get_prev_dose(inputs_df)
     inputs_df["current_gap"] = inputs_df.starttime - inputs_df.prev_endtime
-    inputs_df.loc[(inputs_df.prev_statusdescription == statusdescription) &\
-         (inputs_df.current_gap <= pd.Timedelta(gap_length, unit="minutes")) &\
-             (inputs_df.current_gap >= pd.Timedelta(0)) & \
-         (np.isclose(inputs_df.originalrate, inputs_df.prev_originalrate)), "State"] \
+    inputs_df.loc[(inputs_df.prev_statusdescription == statusdescription) & \
+                  (inputs_df.current_gap <= pd.Timedelta(gap_length, unit="minutes")) & \
+                  (inputs_df.current_gap >= pd.Timedelta(0)) & \
+                  (np.isclose(inputs_df.originalrate, inputs_df.prev_originalrate)), "State"] \
         = GAP_STATUS_DESC_TO_STATE[statusdescription]
-    inputs_df = inputs_df.drop(columns=["prev_starttime", "prev_endtime", "prev_stay_id", "prev_statusdescription", "current_gap"])
+    inputs_df = inputs_df.drop(
+        columns=["prev_starttime", "prev_endtime", "prev_stay_id", "prev_statusdescription", "current_gap"])
     return inputs_df
+
 
 def mark_finishedrunning(inputs_df):
     inputs_df.loc[inputs_df.statusdescription == "FinishedRunning", "State"] = consts.State.FINISHED_RUNNING
     return inputs_df
-    
+
 
 def create_states(inputs_df):
     inputs_df["State"] = consts.State.OK
