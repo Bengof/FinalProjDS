@@ -1,3 +1,8 @@
 # FinalProjDS
-### To unpack data from .gz to .csv format use python3 unpack_data.py
-### To create filtered files both for RNL and data for statistics, uncomment relevant lines from the pipeline.py file and run it.
+### To unpack data from .gz to .csv format use:
+	python3 unpack_data.py
+### To create filtered files and prepare them for RNL, run:
+	preprocess_eicu.py
+	preprocess_mimic.py
+### To train RNL on eICU or MIMIC, run:
+	rnl.rnl_trainer.py
