@@ -36,7 +36,7 @@ theorems-ams-chap-bytype
 \bibtex_command default
 \index_command default
 \paperfontsize 12
-\spacing double
+\spacing onehalf
 \use_hyperref true
 \pdf_bookmarks true
 \pdf_bookmarksnumbered false
@@ -103,8 +103,14 @@ Final Data Science Project (67814) - Analyzing Decision Making in Medical
 \end_layout
 
 \begin_layout Author
-Yuval Roditi, Ben Gofrit - Guided by Prof.
- Michael Beil
+Yuval Roditi, Ben Gofrit
+\end_layout
+
+\begin_layout Author
+Guided by Prof.
+ Michael Beil, Prof.
+ Sigal Sviri and Mr.
+ Gal Hyams
 \end_layout
 
 \begin_layout Section
@@ -112,7 +118,100 @@ Abstract
 \end_layout
 
 \begin_layout Standard
-Up to 250 words, similar to abstracts in articles.
+Sepsis is a deadly condition that accounts for 30% of intensive care admissions
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sepsis_Mortatlity"
+literal "false"
+
+\end_inset
+
+.
+ The gold standard for stabilization Sepsis patient is with the drug Norepinephr
+ine (NOR).
+ Guidelines specify stabilizing patients around target value of 65 Mean
+ Arterial Pressure (MAP) using NOR
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gold_standard"
+literal "false"
+
+\end_inset
+
+, but do not account for specific patient trajectory.
+ Previous research showed high variability in Sepsis treatment patterns
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sepsis_Treatment_Variability"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In this work we show additional evidence for the variability in Sepsis treatment
+ across different ICU units in the same hospital using the MIMIC-IV
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MIMIC-IV"
+literal "false"
+
+\end_inset
+
+ database.
+ In particular, we show that for 
+\begin_inset Formula $\unitfrac{6}{8}$
+\end_inset
+
+ of MAP bins there exists a signifciant 
+\begin_inset Formula $\left(p<0.05\right)$
+\end_inset
+
+ difference in mean NOR dosage between the MICU and SICU units.
+ Given those differences, we looked to harness Reinforcement Learning to
+ establish a NOR dosage recommending AI, seeking to stabilize patients around
+ this target value MAP.
+\end_layout
+
+\begin_layout Standard
+AI models for Sepsis treatment have been developed in the past, most knowingly
+ in 2018 work published in Nature Medicine (Komorowski et al 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Nature_Komorowski"
+literal "false"
+
+\end_inset
+
+)).
+ However, those works focused on limiting mortatlity (long-term reward)
+ and not short-term patient stabilization.
+ Our model uses a simplified state space, which consists only of the binned
+ MAP measurement of the patient.
+ 
+\end_layout
+
+\begin_layout Standard
+Training the model on MIMIC did not produce reasonable results, likely due
+ to the large temporal difference between observations (MAP measurements)
+ and the actions (NOR doses).
+ However, when trained with data from the eICU database
+\begin_inset CommandInset citation
+LatexCommand cite
+key "eICU"
+literal "false"
+
+\end_inset
+
+, which have a higher temporal resolution (MAP every 5 minutes instead of
+ every hour in MIMC), the model produced much more reasonble results, which
+ had a higher Mutual Information between MAP value and dosage.
+ Creating a reliable MAP stabilizing AI-model holds potential for improving
+ the treatment given to Sepsis patients at ICUs.
 \end_layout
 
 \begin_layout Section
@@ -156,7 +255,7 @@ Norepinephrine
 status open
 
 \begin_layout Plain Layout
-NE for short, may sometimes be refered to as noradrenaline (NA)
+NOR for short, may sometimes be refered to as noradrenaline (NA, NE)
 \end_layout
 
 \end_inset
@@ -164,27 +263,11 @@ NE for short, may sometimes be refered to as noradrenaline (NA)
  is a drug, based on a chemical substance with the same name.
  It constricts the blood vessels in the body, thus increasing the blood
  pressure (drugs with this property are known as Vasopressors).
- NE is considered to be the gold standard when treating Sepsis,
-\color green
- (
-\color red
-with a goal of Mean Arterial Pressure of 65 mm Hg
+ NE is considered to be the gold standard when treating Sepsis, with a 
+\color black
+goal of Mean Arterial Pressure (MAP
 \color inherit
-) 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Gold_standard"
-literal "false"
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-However, apart from this rule of thumb, there are no patient-level guidelines
- to instruct treatment for a specific patient.
- For example, even though there is an explicit target goal MAP
 \begin_inset Foot
 status open
 
@@ -200,7 +283,27 @@ Mean Arterial Pressure is a measure of the average pressure in the arteries
 
 \end_inset
 
-, there is no regards for the specific patient's MAP trajectory.
+
+\color black
+) of 65 mm Hg.
+
+\color inherit
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gold_standard"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However, apart from this rule of thumb, there are no patient-level guidelines
+ to instruct treatment for a specific patient.
+ For example, even though there is an explicit target goal MAP, there is
+ no regards for the specific patient's MAP trajectory.
  Thus, it shoud come as no surprise that there is a high variablity in Sepsis
  treatment patterns 
 \begin_inset CommandInset citation
@@ -219,7 +322,7 @@ It is only natural that attempts at harnessing Artifcial Intelligence for
  Such was the vast work published in 2018 Nature Medicine (
 \shape italic
 The Artificial Intelligence Clinician learns optimal treatment strategies
- for sepsis in intensive care
+ for sepsis in intensive care,
 \shape default
  
 \series bold
@@ -234,7 +337,7 @@ literal "false"
 \end_inset
 
 ).
- In this work, a Reinforcment Learning
+ In this work, a Reinforcment Learning (see 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Reinforcement-Learning"
@@ -244,7 +347,7 @@ noprefix "false"
 
 \end_inset
 
- based model was developed to suggest optimal treatment patterns: mainly
+) based model was developed to suggest optimal treatment patterns: mainly
  doses of Vasopressors and IV fluids.
  The target of the model was to reduce the patients' mortality as much as
  possible, be it in the ICU or 90-day mortatlity.
@@ -267,8 +370,8 @@ mortality was lowest in patients for whom clinicians’ actual doses matched
 
 , 
 \shape default
-the work raised substantial criticism and concern regarding applying the
- model in actual clincal use.
+the work raised criticism and concern regarding applying the model in actual
+ clincal use.
  For example in the following figure taken from the manuscript :
 \begin_inset Newline newline
 \end_inset
@@ -295,7 +398,16 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Estimated Policy Values box plots comparing the AI model with different...
+Estimated Policy Values boxplots comparing the AI model with human clinicans,
+ zero-drug policy and random policy 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Nature_Komorowski"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -357,8 +469,8 @@ literal "false"
 
 .
  In March 2021 a new version of MIMC was released - MIMIC-IV.
- It contains deidentified data of 383,220 patients admitted to an intensive
- care unit, publicly available - 50,048 
+ It contains deidentified data of 50,048 patients admitted to an intensive
+ care unit 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "MIMIC-IV"
@@ -417,8 +529,8 @@ literal "false"
 .
  This work analyzed the variability by comparing Sepsis treatment protocols
  in different medical units in the UK's healthcare system (NHS Trusts).
- Considerable variation was found: from which factors define a patient as
- 
+ Considerable variation was found: from the factors that define a patient
+ as 
 \begin_inset Quotes eld
 \end_inset
 
@@ -435,7 +547,7 @@ Even though MIMIC does not contain any identifying data on which clinician
  evident in the data.
  A possible mediator was to look at the treatment variability across between
  different ICU units.
- Two particular units interesed proposed by our project leaders were the
+ Two particular units interesed proposed by our project guides were the
  Medical ICU (MICU) and the Surgical ICU (SICU).
  Those two units differ in both their patient populations (SICU hosts patients
  before / after surgeries) and their care-taker population.
@@ -455,7 +567,7 @@ literal "false"
 We seeked to find evidence for differences in treatment - which we limited
  to the NOR dosage that patients with similar MAP recieved in the different
  units.
- Results and methodoloy detailed in section 
+ Results and methodoloy are detailed in section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "subsec:SICU---MICU"
@@ -483,7 +595,8 @@ We seeked to create a simple interpeteble Reinforcement Learning model to
 
 \begin_layout Standard
 For simplicity, our model used only single most important feature for MAP
- stabilization which is the MAP value itself.
+ stabilization which is the MAP value itself (binned to have a finite state
+ space).
  
 \end_layout
 
@@ -496,8 +609,8 @@ Permutations Test
 \end_layout
 
 \begin_layout Standard
-A Statistical test useds to determine whether two observations were drawn
- from the same distribution.
+Permutations Test is a statistical test useds to determine whether two observati
+ons were drawn from the same distribution.
  It is a non-parametric approach - does not require knowing the distribution
  of the data.
  The test is preformed by randomly taking two groups of the distribution
@@ -515,9 +628,9 @@ Kolmogorov Smoirnov Test
 \begin_layout Standard
 Additional Non-parametric test to determine whether two samples come from
  the same underlying distribution.
- the KST works by calculating CDFs for the two samples and comparing the
- maximal difference between them.
- The maximal difference is known as the KS statistic:
+ the KST works by calculating CDFs (Cumulative Distribution Function) for
+ the two samples and comparing the maximal difference between them.
+ The maximal difference is known as the KS statistic: 
 \begin_inset Formula $D_{KS}=\sup_{x}\left|F\left(x\right)-G\left(x\right)\right|$
 \end_inset
 
@@ -544,10 +657,10 @@ name "subsec:Reinforcement-Learning"
 \end_layout
 
 \begin_layout Standard
-Reinforcement Learning (RNL) is a class of Machine Learning, which corresponds
+Reinforcement Learning (RNL) is a branch of Machine Learning, which corresponds
  to a set of problems and solutions.
- The key factors which differs it from Supervised and Unsupervised Learning
- is that in RNL the solver (Agent) interacts with the enviroment in a dynamic
+ The key factors which distinguish it from Supervised and Unsupervised Learning
+ is that in RNL, the solver (Agent) interacts with the enviroment in a dynamic
  way, looking to optimzie a certain reward function.
  A usual RNL process follows the procedure:
 \end_layout
@@ -603,17 +716,19 @@ literal "false"
 \begin_layout Standard
 During the training phase of RNL, the agent learns which action to take
  at a given state, to maximize the reward.
+\begin_inset Newline newline
+\end_inset
+
  We will notate the set of all possible actions with a capital 
 \begin_inset Formula $\mathcal{A},$
 \end_inset
 
- and set of all possible states 
+ and set of all possible states -
 \begin_inset Formula $\mathcal{S}$
 \end_inset
 
 .
- A few important definitions for our context in this regards (taken from
- 
+ A few important definitions for our context (taken from 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "RL Sutton Barto"
@@ -686,7 +801,8 @@ v_{\pi}\left(s\right)=E_{\pi}\left(\sum_{k=0}^{\infty}\gamma^{k}R_{t+k+1}\mid S_
 \begin_inset Formula $\pi$
 \end_inset
 
- from state s, 
+ from state s.
+ 
 \begin_inset Formula $R_{k}$
 \end_inset
 
@@ -699,7 +815,7 @@ v_{\pi}\left(s\right)=E_{\pi}\left(\sum_{k=0}^{\infty}\gamma^{k}R_{t+k+1}\mid S_
 \end_inset
 
  is a discount factor - a hyperparameter used to discount the value of longer
- termed reward (ensure the convergence of the series).
+ termed reward (ensures the convergence of the series).
  
 \end_layout
 
@@ -732,8 +848,7 @@ Action-Value function (Q-Function)
 \begin_inset Formula $\pi$
 \end_inset
 
- thereafter.
- 
+ thereafter:
 \begin_inset Formula 
 \[
 q_{\pi}\left(s,a\right)=E_{\pi}\left(\sum_{k=0}^{\infty}\gamma^{k}R_{t+k+1}\mid S_{t}=s,A_{t}=a\right)
@@ -797,15 +912,11 @@ After doing so, we want to check for each group the hypothesis that the
 \end_layout
 
 \begin_layout Standard
-We start by checking each of the 
+We tested for each of the 
 \begin_inset Formula $8$
 \end_inset
 
- hypothesis separately: for each 
-\begin_inset Formula $j=0,\ldots,7$
-\end_inset
-
- we test:
+ hypothesis separately:
 \end_layout
 
 \begin_layout Standard
@@ -870,7 +981,7 @@ permutation_test.ipynb
 \begin_inset Quotes erd
 \end_inset
 
- for reproduction 
+ for reproduction .
 \end_layout
 
 \end_inset
@@ -896,7 +1007,7 @@ It is evident that in almost all groups there has been a significant difference
 \begin_inset Formula $(60,64)$
 \end_inset
 
-.
+,, which is very close to the target value.
 \end_layout
 
 \begin_layout Subsubsection
@@ -918,8 +1029,8 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename pasted1.png
-	scale 55
+	filename histogram_per_bp.jpeg
+	scale 50
 
 \end_inset
 
@@ -932,7 +1043,7 @@ status open
 \begin_layout Plain Layout
 PDF of the original NOR rate in each BP group, with division to MICU and
  SICU, alongside KST p-val and the amount of samples in each group.
- For reproudction - run gamma_distribution_test.ipynb notebook
+ For reproudction - run ks_test.ipynb notebook
 \end_layout
 
 \end_inset
@@ -946,13 +1057,13 @@ PDF of the original NOR rate in each BP group, with division to MICU and
 \end_layout
 
 \begin_layout Standard
-*Similarly to the p-values generated using the permutation test, in most
+Similarly to the p-values generated using the permutation test, in most
  groups 
 \begin_inset Formula $p-val<0.05,$
 \end_inset
 
  evident that there is a significant difference in the means of the NOR
- dosage given to patients with similar BP between the different units.
+ dosage given to patients with similar BP between the units.
 \end_layout
 
 \begin_layout Standard
@@ -972,6 +1083,50 @@ Two groups that did not have a significant difference are the first group
 
  and 
 \begin_inset Formula $\left(75-79\right).$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+In both units, the dosage variabilty changes according to the prior BP measureme
+nt.
+ Around the edges the variability is higher, while in the 50-90 portion
+ the variability is lower.
+ This could explain the high p-value for the first bin (0-49).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename nor_dosage_per_bp_mimic.jpeg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Illustration of the dosage variability per prior BP in the MIMIC database.
+ For reproduction: 'databases_variability.ipynb' 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
@@ -998,8 +1153,8 @@ Agent - the caretaker, which decides which action to take.
 
 \begin_layout Itemize
 States - represented as the MAP bin of the patient.
- We defined the bins in 5 MAP values intervals:
-\begin_inset Formula $\mathcal{S}=\left[\left(0,5\right),\left(5,10\right),\ldots,\left(195,200\right)\right].$
+ We defined the bins like before: 
+\begin_inset Formula $\mathcal{S}=\left[\underset{b_{0}}{\underbrace{(0,49)}},(50,59),\ldots,(80,89),\underset{b_{7}}{\underbrace{(90,200)}}\right].$
 \end_inset
 
 
@@ -1018,7 +1173,7 @@ Actions - NOR dosage.
 \begin_layout Itemize
 Reward function - we decided to define ahead of training the goal of maximizing
  the amount of time a patient spents in the recommended area of 65 MAP.
- Therfore the reward function was defined to be the negative square distance
+ Therfore, the reward function was defined to be the negative square distance
  from 65 
 \begin_inset Formula $R_{t}=-\left\Vert s_{t}-65\right\Vert ^{2}$
 \end_inset
@@ -1049,7 +1204,7 @@ Offline RNL
 In classic RNL setting, the agent has the freedom to knowingly make explorative
  non-optimal desicions with the goal of widening its knowledge on the enviroment.
  For our task and data this is neither possible (since we have a static
- dataset) nor ethical (doing so would mean taking knowingly wrong choices
+ dataset) nor ethical (doing so would mean knowingly taking wrong choices
  in patient treatment).
  The solution is Offline RNL - the agent learns 
 \shape italic
@@ -1076,7 +1231,7 @@ literal "false"
 \end_layout
 
 \begin_layout Subsubsection
-Markov Property and Modeling
+Markovian Assumption
 \end_layout
 
 \begin_layout Standard
@@ -1127,7 +1282,7 @@ Patient Simulator
 \shape italic
 give_dose
 \shape default
- API function.
+ API .
  
 \shape italic
 Give_dose
@@ -1142,7 +1297,7 @@ Give_dose
 \end_inset
 
  is by sampling the training data after conditioning.
- We'll define 
+ We'll estimate 
 \begin_inset Formula $\hat{\tau}$
 \end_inset
 
@@ -1307,7 +1462,7 @@ Two important edge cases left to be considered were how to start and end
 \end_inset
 
 .
- Likewise, when we happen to sample using the transition function 
+ Likewise, when we sample using the transition function 
 \begin_inset Formula $\hat{\tau}$
 \end_inset
 
@@ -1339,7 +1494,7 @@ We choose to train our RNL model using Q-Learning Monte Carlo algorithm.
 \begin_inset Formula $\pi,$
 \end_inset
 
-and update the 
+ and update the 
 \begin_inset Formula $q$
 \end_inset
 
@@ -1405,7 +1560,7 @@ Output:
 \begin_inset Formula $\pi^{\ast}$
 \end_inset
 
-, Estimated Value for each state 
+ and Estimated Value function for that policy 
 \begin_inset Formula $\hat{v}_{\pi^{\ast}}$
 \end_inset
 
@@ -1568,7 +1723,8 @@ Termination
 \begin_inset Formula $v_{\pi_{N-episodes}}\left(s\right)=\max\left\{ q\left(s,a\right)\mid a\in\mathcal{A}\right\} $
 \end_inset
 
- Return 
+.
+ Algorith returns the pair: 
 \begin_inset Formula $\pi_{N-episodes},$
 \end_inset
 
@@ -1641,8 +1797,15 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename pasted4.png
-	scale 40
+	filename expected_bp_mimicjpeg.jpeg
+	scale 45
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename MIMIC_BP_POLICY_RNL.jpeg
+	scale 45
 
 \end_inset
 
@@ -1654,7 +1817,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Estimated BP Value function after 
+MIMIC trained: Estimated BP Value function after 
 \begin_inset Formula $1,000$
 \end_inset
 
@@ -1663,7 +1826,7 @@ Estimated BP Value function after
 \end_inset
 
 .
- For reproduciton code see rnl_exploration.ipynb notebook
+ For reproduciton code see rnl_resuls.ipynb notebook.
 \end_layout
 
 \end_inset
@@ -1679,10 +1842,11 @@ Estimated BP Value function after
 \begin_layout Standard
 The policy appears to be in complete disorder, similar to Gaussian noise.
  The Estimated category value has more order to it, reflecting the reward
- function: in the higher bins the estimated value is 0, since no entries
- in the dataset were available for those bins.
- lowset estimated bin value is around 80-90, reflecting areas were the probabili
-ty to go back to the target value of 65 is the lowest.
+ function.
+ The lower bins have more value since there is a higher probability to get
+ to the target of 65, while lowset estimated bin value is around 80-90,
+ reflecting areas were the probability to go back to the target value is
+ the lowest.
  
 \end_layout
 
@@ -1694,12 +1858,8 @@ eICU RNL
 The eICU offers a higher time resolution of BP measurements.
  While patients in MIMIC have an average of one measurement per hour, in
  the eICU time resolution is every five minutes.
- This encouraged us to process the eICU data to fit our RNL framework as
- well, and train our model using this data.
-\end_layout
-
-\begin_layout Standard
-The results were significantly less entropied than those obtained from MIMIC:
+ As the number of samples available in the interval between each NOR injection
+ is larger, the variance before each NOR injection is smaller:
 \end_layout
 
 \begin_layout Standard
@@ -1712,15 +1872,15 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename pasted5.png
-	scale 40
+	filename hist_before_injection_eicu.jpeg
+	scale 45
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename pasted6.png
-	scale 40
+	filename hist_before_injection_mimic.jpeg
+	scale 45
 
 \end_inset
 
@@ -1732,7 +1892,63 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Estimated BP Value function after 
+Histogram of BPs Prior to NOR injection, comparision of MIMIC and eICU.
+ Both have a gaussian bell curve with similar means (marked in red).
+ However the variance in eICU is much lower, which hints it may be more
+ suitable for learning using simulation in the RNL setting.
+ For reproducion run: 'databases_variability.ipynb'
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This encouraged us to process the eICU data to fit our RNL framework as
+ well, and train our model using this data.
+\end_layout
+
+\begin_layout Standard
+The results were significantly more plausible than those obtained from MIMIC:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename eICU_Expected_value.jpeg
+	scale 45
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename eICU_Policy.jpeg
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+eICU trained: Estimated BP Value function after 
 \begin_inset Formula $1,000$
 \end_inset
 
@@ -1741,7 +1957,7 @@ Estimated BP Value function after
 \end_inset
 
 .
- For reproduciton code see rnl_exploration.ipynb notebook
+ For reproduciton code see rnl_results.ipynb notebook
 \end_layout
 
 \end_inset
@@ -1752,6 +1968,82 @@ Estimated BP Value function after
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+It looks that the policy that was obatined with eICU is more reasonable
+ than MIMIC: Recommends higher dosage in the low BP range, and as we get
+ close to 65 lower doses.
+ The exception is the right handside of the BP ranges, where the model suggests
+ higher doses.
+ This is unreasonable and may be due to symmetric reward function chosen
+ (see 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:Reward-function:-Our"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsubsection
+Evaluation Metric 
+\end_layout
+
+\begin_layout Standard
+While it is clear to the observer , It is hard to quantify the 
+\shape italic
+
+\begin_inset Quotes eld
+\end_inset
+
+reasonablity
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\shape default
+of the eICU policy vs the MIMIC.
+ One attempt at quantifiying this is to look at the relation between the
+ BP range and the recommended dosage.
+ We would expect that a 
+\begin_inset Quotes eld
+\end_inset
+
+good
+\begin_inset Quotes erd
+\end_inset
+
+ policy will be closely related to the BP value observed.
+ However, the relation should not be linear and may not be even monotonic.
+ A measure of the information one variable provides on the other is Mutual
+ Information.
+ Defined as :
+\begin_inset Formula 
+\[
+MI(X,Y)=\sum_{x}\in X\sum_{y}\in Yp(x,y)log\frac{p(x,y)}{p(x)p(y)}
+\]
+
+\end_inset
+
+MI quantifies the amount of information that one random variable contains
+ about another.
+ More specifically, it measures the reduction in uncertainty about one random
+ variable given knowledge of the other.
+ In our case, the MI of BP and the MIMIC policy was 
+\begin_inset Formula $0.801$
+\end_inset
+
+, while the MI of BP and the eICU policy was 
+\begin_inset Formula $1.147$
+\end_inset
+
+, suggesting that for eICU, BP values provided a more significant uncertainty
+ reduction regarding the policy (see rnl_results.ipynb notebook for code).
 \end_layout
 
 \begin_layout Section
@@ -1771,7 +2063,7 @@ As expected, we witnessed major differences between the doses given to patients
 \end_inset
 
 , and bins near the target value.
- This finding supporting previous research on Sepsis treatment variability,
+ This finding supports previous research on Sepsis treatment variability,
  showing that there is no uniform policy for treatment, even within the
  same hospital.
  Examing the CDF of NOR doses for each BP group provided additional insights
@@ -1809,19 +2101,19 @@ RNL
 \begin_layout Standard
 We've estabilshed a simple, short-term RNL model, looking to stabilize a
  patient near the target MAP value of 65.
- Training the model on MIMIC data provided poor results, which were highly
- entropied and did not pass the reasonability test.
+ Training the model on MIMIC data provided poor results, which did not pass
+ the reasonability test.
  The model makes the Markovian assumption, which likely does not hold in
  low time resolution data like MIMIC (BP mesaurement every hour).
  However, training the model on the eICU data, which had a higher time resolutio
-n (~mesaurement every 5 min on average) showed much more plausible and less
- entropied results.
- 
+n (mesaurement every 5 min on average) showed much more plausible results,
+ and generated a better Mutual Information between the BP and Policy recommended
+ dose.
 \end_layout
 
 \begin_layout Standard
-The initial target of our study was to preform behaivoral analysis - check
- what is the target MAP that doctors in different units aim to.
+The initial target of our study was to preform behaivoral analysis - find
+ out what is the target MAP that doctors in different units aim to.
  In this study we found that 
 \series bold
 in order to learn
@@ -1831,13 +2123,13 @@ in order to learn
 behaviors, we need a close temporal resolution 
 \series default
 - between the MAP value observed and the desicion (NOR dose) that followed.
- As proof of this, we showed that learning from a higher resolution data
+ As a proof of this, we showed that learning from a higher resolution data
  gives more plausible policies.
  
 \end_layout
 
 \begin_layout Standard
-Focusing on a short term model holds potential for clincal applications.
+Focusing on a short-term model holds potential for clincal applications.
  It uses the key factor crucial for maintaining the patient alive in the
  state of Septic shock - the MAP, and could be relevant to situations where
  only the short goal of stabilizing the patient is important.
@@ -1852,24 +2144,25 @@ Focusing on a short term model holds potential for clincal applications.
  grows exponentially with each variable added).
 \end_layout
 
-\begin_layout Standard
-
-\shape italic
-About 2 written pages, discussing the results and their implications.
-\end_layout
-
-\begin_layout Subsection
-A Brief Summary of the Results in Retrospective 
-\end_layout
-
 \begin_layout Subsection
 Conclusions Based on the Results
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
+In conclusion, there has been shown significant evidence for differences
+ in Sepsis treatment patterns between MICU and SICU units.
+ A necessary condition for creating a baseline AI model that is able to
+ recommend Sepsis treatment regimes is to have a high temporal resolution
+ between observations (MAP measurements) and desicions (NOR injections).
+\end_layout
 
-\series bold
-RNL
+\begin_layout Standard
+In this regard, eICU is more suited for the task than MIMIC, as the temporal
+ resolution it provides is higher.
+ An indicator for this is the much more plausible results obtained when
+ training the RNL model on the eICU data.
+ Creating a MAP stabilizing AI-model holds potential for improving the treatment
+ given to Sepsis patients at ICUs.
 \end_layout
 
 \begin_layout Subsection
@@ -1883,9 +2176,12 @@ Markovian Assumtpion
 \series default
 : the model assumed the Markovity of the decision process.
  Although simplifying, this isn't an unreasonable assumption: the half life
- of NOR is about a minute, so the decisions conclusions are instant.
- However, as discussed before, this only holds if the data reflects this
- time resolution.
+ of NOR is about a minute, so the decisions' results are instant.
+ However, as discussed before,
+\series bold
+ this only holds if the data reflects this time resolution
+\series default
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -1929,12 +2225,26 @@ in-silico
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Enumerate
 
-\shape italic
-A critical discussion on the work's limitations, simplifying assumptions,
- possible biases etc, and their possible effects on the results and the
- conclusions.
+\series bold
+Reward function:
+\series default
+ Our reward function was a symmetric 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+ distance from the target value of 65 MAP.
+ In practice, no such equilibrium exists: MAP values of 45 and 85 are very
+ different from a clinical standpoint and should not be rewarded equally.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:Reward-function:-Our"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1944,11 +2254,12 @@ Future Work
 \begin_layout Standard
 The resulted model are far from being clinicaly relevant and applicable.
  A crucial first step will be to compare the model's suggestions on actual
- patients to the decisions made by the doctor, and check if they are within
+ patients to the decisions made by a clinician, and check if they are within
  a reasonable range.
- Look into the areas of disagreement between the clinician and the AI, and
- use the hindsight test to verify who was right (e.g - AI suggested higher
- dose, the patient's BP did not rise, doctor had to adjust and vice-versa).
+ Next, one should dive into the areas of disagreement between the clinician
+ and the AI, and use the hindsight test to verify who was right (e.g - AI
+ suggested higher dose, the patient's BP did not rise, clinician had to
+ adjust and vice-versa).
  
 \end_layout
 
@@ -1957,6 +2268,13 @@ In addition, several important adjustments are required:
 \end_layout
 
 \begin_layout Enumerate
+
+\series bold
+Adding variables to the model :
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
 Add the fluids the patient recieves as an additional variable.
 \end_layout
 
@@ -1964,13 +2282,23 @@ Add the fluids the patient recieves as an additional variable.
 Take comorbidities into account (other medicines that are taken simultaneously).
 \end_layout
 
+\end_deeper
 \begin_layout Enumerate
-Consider taking several MAP entries back, not just most recent.
+
+\series bold
+Markovian Relaxation
+\series default
+: Consider taking several MAP entries back, not just most recent.
+ Doing so could relax the strong Markovian assumption.
  
 \end_layout
 
 \begin_layout Enumerate
-Adjust the RNL hyperparameters: Number of Episodes, 
+
+\series bold
+Fine-tune the RNL hyperparameters
+\series default
+: Number of Episodes, 
 \begin_inset Formula $\gamma$
 \end_inset
 
@@ -1982,21 +2310,68 @@ Adjust the RNL hyperparameters: Number of Episodes,
 \end_layout
 
 \begin_layout Enumerate
-Consider soft borders between bins.
+
+\series bold
+Smooth Sampling in Simulation
+\series default
+.
+ During simulation phase, instead of sampling from patients with the exact
+ same bins, consider sampling from all bins, only with lower probability.
 \end_layout
 
 \begin_layout Enumerate
-Consider another reward function.
+
+\series bold
+Different reward function
+\series default
+.
+ We choose for simplicity a symmetric 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+ distance from 65, which limits the model (see 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:Reward-function:-Our"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ A more accurate reward function should be defined to better reflect the
+ clincian's point of view in terms of which MAP value is the most stable.
  
 \end_layout
 
 \begin_layout Enumerate
-Consider termination conditions
+
+\series bold
+Termination conditions
+\series default
+: Terminate patients simualtion that reach unreasonable MAP values, not
+ only based on the data.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Modern Neural Network Architecture: 
+\series default
+The model could be reshaped to match the modern NN approaches for handling
+ sequential data - the Transformer model.
+ It could include attention (for faster computations) and long term memory,
+ which could also help relax the Markovian assumption.
 \end_layout
 
 \begin_layout Standard
-A discussion on relevant future work, maybe taking into account the current
- limitations and possible solutions to them.
+After a stable model passes the human comparision test, it could be used
+ for behavioral analysis.
+ In particular, Inverse RNL: Inferring which target values achieve the most
+ reward, which is relevant in understanding the current treatment patterns
+ used in practice.
+ 
 \end_layout
 
 \begin_layout Section
@@ -2010,11 +2385,11 @@ Preprocessing
 \begin_layout Standard
 In order to work nimbly, we created a subset of the relevant data from all
  the possible data that MIMIC-IV offers.
- The subset was creaded by applying the following filters:
+ The subset was creaded by applying the following folters:
 \end_layout
 
 \begin_layout Subsubsection
-Patients Filters 
+Patients Filters
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Patients-Filters"
@@ -2115,7 +2490,14 @@ HR and BP events
 
 \end_deeper
 \begin_layout Subsubsection
-Input Events Filters
+Input 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Input-Events-Filters"
+
+\end_inset
+
+Events Filters
 \end_layout
 
 \begin_layout Enumerate
@@ -2175,7 +2557,7 @@ By applying all the filters we got 754 MB that we could load into the memory
 \end_layout
 
 \begin_layout Subsubsection
-Decisions Filter 
+Decisions Filter
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Decisions-Filter"
@@ -2188,7 +2570,7 @@ name "subsec:Decisions-Filter"
 \begin_layout Standard
 The main part of the project is analyzing the decision making of the medical
  teams.
- Since the most important part if thehuman decision, The idea of decision
+ Since the most important part is the human decision, The idea of decision
  filter is to keep only events of doses that were taken by a medical authority,
  and were not recorded automatically.
  In contrast to the previous filters, in which data was kept because of
@@ -2239,58 +2621,55 @@ literal "false"
  It infers that those records are not an active decision of a human.
  Deeper investigation of those records shows that indeed the rate of those
  records is not one that human will decide to type manually (like 0.080032155,
- 0.10005264, 0.3417207 )
+ 0.10005264, 0.3417207 ).
+ Therefore, we defined those doses as non-desicion doses.
 \end_layout
 
 \begin_layout Enumerate
 
 \series bold
-Previous dose was stopped or paused within short time gap
+Short gap between two doses that the first was stopped or paused
 \series default
- - sdgsd
+ - there are specific status descriptions in the input event files that
+ implies that the dose was paused or stopped by the caretaker.
+ Sometimes, there is a record of a successive dose that comes immediately
+ after and with same or very close dose rate (for example 0.2 and 1.9999).
+ In this case we defined the successive dose as non-decision dose.
 \end_layout
 
-\begin_layout Subsection
-Statistical Methods and Considerations
+\begin_layout Enumerate
+
+\series bold
+Successive doses with almost same dose rate - 
+\series default
+there are cases in which the first dose have an endtime that is the same
+ as the starttime of the successive dose, and in addition the dose rate
+ is almost the same.
+ In those cases we defined the successive dose as non-decision dose.
 \end_layout
 
-\begin_layout Subsection
-Models and ML Methods Used
-\end_layout
-
-\begin_layout Standard
-If they were not thoroughly discussed earlier.
- Maybe relevant model training details.
-\end_layout
-
-\begin_layout Subsection
-Resources
-\end_layout
-
-\begin_layout Subsection
-Work Pipeline
-\end_layout
-
-\begin_layout Standard
-A description and a flowchart of the work pipeline
-\end_layout
-
-\begin_layout Subsection*
-Division of work
+\begin_layout Subsubsection
+Medicine overlap filter
 \end_layout
 
 \begin_layout Standard
-If you split the responsibilities.
+In many cases a patient get more than one vasopressors simultaneously.
+ This situation leads to a difference in the dose rate of Norepinphrine
+ between two patients with the same symptoms.
+ In order to solve this issue, we filtered out cases in which there are
+ overlap between vasopressors.
+ The vasopressors that we take into account are the those were mentioned
+ previously.
  
-\end_layout
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Input-Events-Filters"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_layout Itemize
-Name Nameson: Some work done only by them.
- 
-\end_layout
+\end_inset
 
-\begin_layout Itemize
-Name Namesberg: Some work done only by them.
  
 \end_layout
 
