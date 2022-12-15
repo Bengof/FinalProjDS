@@ -4,5 +4,5 @@
 ### To create filtered files and prepare them for RNL, run:
 	preprocess_eicu.py
 	preprocess_mimic.py
-### To train RNL on eICU or MIMIC, run:
+### To train RNL on eICU or MIMIC, edit the variable data_path to be the path of the relevant preprocessed file in the following file:
 	rnl.rnl_trainer.py

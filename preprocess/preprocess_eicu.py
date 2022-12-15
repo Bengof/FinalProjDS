@@ -59,6 +59,8 @@ if '__main__' == __name__:
     # filter files
     sepsis_stay_ids = filter_diagnosis(diagnosis)
     filtered_bp = filter_bp("../data/eICU/vitalPeriodic.csv", sepsis_stay_ids)
+    filtered_bp.to_csv("filtered_bp_eicu.csv")
+    filtered_bp = pd.read_csv("filtered_bp_eicu.csv")
     filtered_drugs = filter_infusiondrug(infusiondrug)
     filtered_bp = filtered_bp[filtered_bp["stay_id"].isin(filtered_drugs["stay_id"].unique())]
     stay_ids = filtered_bp.groupby(by="stay_id").agg({"cur_bp": "count"})

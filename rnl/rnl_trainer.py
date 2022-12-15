@@ -6,7 +6,13 @@ from pickle import dump
 if __name__ == '__main__':
     bins = pd.IntervalIndex.from_tuples(
         [(0, 50), (50, 60), (60, 65), (65, 70), (70, 75), (75, 80), (80, 90), (90, 200)], closed="left")
+
+    # For MIMIC:
+    # data_path = "../processed/RNLData/MIMIC_bps_with_doses.csv"
+
+    # For eICU:
     data_path = "../processed/RNLData/full_eICU_bps_with_doses.csv"
+
     gamma = 0.9
     epsilon = 0.2
     all_possible_actions = np.arange(0, 0.4, 0.01)

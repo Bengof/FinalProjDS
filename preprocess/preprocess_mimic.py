@@ -24,7 +24,7 @@ def create_filtered_files():
 def run_pipeline(count_samples_stay_ids=None, create_filtered_files_flag=False):
     if create_filtered_files_flag:
         create_filtered_files()
-    input_events = pd.read_csv("../filtered/input_events_filtered_by_subject_id_and_medicine.csv")
+    input_events = pd.read_csv("../filtered/filtered_input_events.csv")
     print("Read input events")
     chart_events = pd.read_csv("../filtered/filtered_chartevents.csv")
     print("Read chart events")
@@ -126,6 +126,7 @@ def generate_rnl_states_and_actions(bps, doses):
 if '__main__' == __name__:
     inputevents_states_ok, inputevents_states_full = run_pipeline(create_filtered_files_flag=True)
     inputevents_states_ok.to_csv("../processed/inputevents_decision_only.csv")
+    inputevents_states_ok = pd.read_csv("../processed/inputevents_decision_only.csv")
     bps = pd.read_csv("../filtered/filtered_chartevents.csv")
     bps = _read_bp_rnl(bps)
     bps_and_dose = generate_rnl_states_and_actions(bps, inputevents_states_ok)
