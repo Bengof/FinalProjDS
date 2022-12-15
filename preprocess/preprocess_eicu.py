@@ -34,9 +34,9 @@ def filter_infusiondrug(infusion_drug):
     return drugs_in_mimic_format
 
 
-def filter_bp(bp_path):
+def filter_bp(bp_path, sepsis_stay_ids):
     filtered_bp = filter_big_file(bp_path,
-                                 filtered_patients,
+                                  sepsis_stay_ids,
                                  subject_id_col_name="patientunitstayid")
     filtered_bp = filtered_bp[~filtered_bp["systemicmean"].isna()]
     filtered_bp = filtered_bp[["patientunitstayid", "observationoffset", "systemicmean"]]
@@ -57,14 +57,17 @@ if '__main__' == __name__:
     infusiondrug = infusiondrug.merge(patients_weight, on="patientunitstayid")
 
     # filter files
-    filtered_patients = filter_diagnosis(diagnosis)
-    filtered_bp = filter_bp("../data/eICU/vitalPeriodic.csv")
+    sepsis_stay_ids = filter_diagnosis(diagnosis)
+    filtered_bp = filter_bp("../data/eICU/vitalPeriodic.csv", sepsis_stay_ids)
     filtered_drugs = filter_infusiondrug(infusiondrug)
+    filtered_bp = filtered_bp[filtered_bp["stay_id"].isin(filtered_drugs["stay_id"].unique())]
+    stay_ids = filtered_bp.groupby(by="stay_id").agg({"cur_bp": "count"})
+    stay_ids_with_enough_events = stay_ids[stay_ids["cur_bp"] > 10].index
+    filtered_bp = filtered_bp[filtered_bp["stay_id"].isin(stay_ids_with_enough_events)]
 
-    # generate State - Action - State triples
+    #generate State - Action - State triples
     bps_and_dose = generate_rnl_states_and_actions(filtered_bp, filtered_drugs)
     bps_and_dose = bps_and_dose.rename(columns={"originalrate": "dose"})
-    print("finish rnl")
 
     # filter out garbage
     bps_and_dose_thresh = bps_and_dose[(bps_and_dose["cur_bp"] < 180) | (bps_and_dose["last"])]

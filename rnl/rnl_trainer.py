@@ -18,4 +18,3 @@ if __name__ == '__main__':
     dump(V, open('artifacts/V_eICU_full.pkl', 'wb'))
     dump(policy, open('artifacts/policy_eICU_full.pkl', 'wb'))
     dump(deltas, open('artifacts/deltas_eICU_full.pkl', 'wb'))
-    print("finished")

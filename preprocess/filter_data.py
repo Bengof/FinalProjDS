@@ -57,7 +57,7 @@ def save_filtered_inputevents():
     input_events_subject_id_itemid = input_events_subject_id_itemid.merge(ITEM_IDS[["itemid", "label"]],
                                                                           left_on="itemid", right_on="itemid")
     input_events_subject_id_itemid = input_events_subject_id_itemid.rename(columns={"label": "itemid_label"})
-    input_events_subject_id_itemid.to_csv("filtered\\filtered_input_events.csv")
+    input_events_subject_id_itemid.to_csv("../filtered/filtered_input_events.csv")
 
 
 def save_filtered_chartevents():
@@ -66,23 +66,23 @@ def save_filtered_chartevents():
     filtered_chartevents = filtered_chartevents.merge(ITEM_IDS[["itemid", "label"]], left_on="itemid",
                                                       right_on="itemid")
     filtered_chartevents = filtered_chartevents.rename(columns={"label": "itemid_label"})
-    filtered_chartevents.to_csv("filtered\\filtered_chartevents.csv")
+    filtered_chartevents.to_csv("../filtered/filtered_chartevents.csv")
 
 
 def save_filtered_icustays():
     filtered_icustays = chunk_filtering.filter_big_file("../data/icu/icustays.csv", get_sepsis_subject_ids())
-    filtered_icustays.to_csv("filtered\\filtered_icustays.csv")
+    filtered_icustays.to_csv("../filtered/filtered_icustays.csv")
 
 
 def save_filtered_procedureevents():
     filtered_procedureevents = filter_small_file("../data/icu/procedureevents.csv", get_sepsis_subject_ids(),
                                                  get_procedureevents_itemids())
-    filtered_procedureevents.to_csv("filtered\\filtered_procedureevents.csv")
+    filtered_procedureevents.to_csv("../filtered/filtered_procedureevents.csv")
 
 
 def save_filtered_transfers():
     filtered_procedureevents = filter_small_file("../data/core/transfers.csv", get_sepsis_subject_ids())
-    filtered_procedureevents.to_csv("filtered\\filtered_transfers.csv")
+    filtered_procedureevents.to_csv("../filtered/filtered_transfers.csv")
 
 
 def save_filtered_labevents():
@@ -92,7 +92,7 @@ def save_filtered_labevents():
     filtered_labevents = filtered_labevents.rename(columns={"label": "itemid_label"})
     filtered_labevents = filtered_labevents.drop(filtered_labevents[filtered_labevents["value"] == "-"].index)
     filtered_labevents["value"] = filtered_labevents["value"].astype(float)
-    filtered_labevents.to_csv("filtered\\filtered_labevents.csv")
+    filtered_labevents.to_csv("../filtered/filtered_labevents.csv")
 
 
 def save_filtered_patients():
@@ -102,7 +102,7 @@ def save_filtered_patients():
     sepsis_patients = PATIENTS.merge(patients_subject_ids, left_on="subject_id", right_on="subject_id")
     sepsis_patients = sepsis_patients[
         (sepsis_patients["anchor_age"] >= consts.MINIMAL_AGE) & (sepsis_patients["anchor_age"] <= consts.MAXIMAL_AGE)]
-    sepsis_patients.to_csv("filtered\\filtered_patients.csv")
+    sepsis_patients.to_csv("../filtered/filtered_patients.csv")
 
 
 def filter_short_stays_and_different_unit(inputevents, icustays_filtered):

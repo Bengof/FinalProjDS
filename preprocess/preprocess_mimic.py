@@ -24,7 +24,7 @@ def create_filtered_files():
 def run_pipeline(count_samples_stay_ids=None, create_filtered_files_flag=False):
     if create_filtered_files_flag:
         create_filtered_files()
-    input_events = pd.read_csv("filtered\\input_events_filtered_by_subject_id_and_medicine.csv")
+    input_events = pd.read_csv("../filtered/input_events_filtered_by_subject_id_and_medicine.csv")
     print("Read input events")
     chart_events = pd.read_csv("../filtered/filtered_chartevents.csv")
     print("Read chart events")
@@ -44,8 +44,7 @@ def run_pipeline(count_samples_stay_ids=None, create_filtered_files_flag=False):
     return inputevents_states_ok[inputevents_states_ok.itemid_label == "Norepinephrine"], inputevents_states_full
 
 
-def _read_bp_rnl(chartevents_path):
-    bps = pd.read_csv(chartevents_path)
+def _read_bp_rnl(bps):
     # keep only BP event from the specific type we need
     bps = bps[bps.itemid.isin([225312, 220052, 220181])]
     bps = bps.rename(columns={"value": "cur_bp", "charttime": "cur_bp_time"})
@@ -103,7 +102,8 @@ def add_bp_catgeories(df):
 
 
 def generate_rnl_states_and_actions(bps, doses):
-    stay_ids = doses.stay_id.unique()
+    bps = bps[bps["stay_id"].isin(doses["stay_id"].unique())]
+    stay_ids = bps.stay_id.unique()
     bps_and_dose = None
     for stay_id in tqdm(stay_ids):
         bps_and_dose_per_stay = doses_per_stay_id(stay_id, bps, doses)
@@ -127,5 +127,7 @@ if '__main__' == __name__:
     inputevents_states_ok, inputevents_states_full = run_pipeline(create_filtered_files_flag=True)
     inputevents_states_ok.to_csv("../processed/inputevents_decision_only.csv")
     bps = pd.read_csv("../filtered/filtered_chartevents.csv")
-    bp_rnl = generate_rnl_bp_events(bps, inputevents_states_ok)
-    bp_rnl.to_csv("../processed/RNLData/MIMIC_bps_with_doses.csv")
+    bps = _read_bp_rnl(bps)
+    bps_and_dose = generate_rnl_states_and_actions(bps, inputevents_states_ok)
+    bps_and_dose = bps_and_dose.rename(columns={"originalrate": "dose"})
+    bps_and_dose.to_csv("../processed/RNLData/MIMIC_bps_with_doses.csv")
